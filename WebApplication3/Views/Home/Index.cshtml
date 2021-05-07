@@ -1,33 +1,12 @@
 ﻿@{
-    Layout = null;
+    ViewBag.Title = "Index";
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Книжный магазин</title>
-</head>
-<body>
-    <div>
-        <h3>Распродажа книг</h3>
-        <table>
-            <tr>
-                <td><p>Название книги</p></td>
-                <td><p>Автор</p></td>
-                <td><p>Цена</p></td>
-                <td></td>
-            </tr>
-            @foreach (var b in ViewBag.Users)
-            {
-                <tr>
-                    <td><p>@b.UsrId</p></td>
-                    <td><p>@b.Username</p></td>
-                    <td><p>@b.Email</p></td>
-                </tr>
-            }
-        </table>
-    </div>
-</body>
-</html>
+<h2>Index</h2>
+Welcome @HttpContext.Current.User.Identity.Name
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("Logout","User", FormMethod.Post, new { id="logoutForm"}))
+    {
+        <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+    }
+}
