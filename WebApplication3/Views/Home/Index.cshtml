@@ -9,4 +9,8 @@ Welcome @HttpContext.Current.User.Identity.Name
     {
         <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
     }
+
 }
+<div>
+    @Html.ActionLink("Написать отзыв", "Review", "Review")
+</div>
