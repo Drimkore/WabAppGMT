@@ -6,12 +6,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebApplication3.Models
 {
-    public class Game
+    public class Review
     {
         [Key]
+        public int ReviewId { get; set; }
+        public int UserId { get; set; }
         public int GameId { get; set; }
-        public string GameName { get; set; }
-        public string GameDiscription { get; set; }
-        public string GameLink { get; set; }
+        public int ReviewScore { get; set; }
+        public string ReviewText { get; set; }
     }
 }
