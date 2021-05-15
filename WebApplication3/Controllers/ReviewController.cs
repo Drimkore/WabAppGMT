@@ -14,6 +14,7 @@ namespace WebApplication3.Controllers
     public class ReviewController : Controller
     {
         DBContext games = new DBContext();
+        DBContext reviews = new DBContext();
 
 
         // GET: Review
@@ -48,6 +49,25 @@ namespace WebApplication3.Controllers
             ViewBag.Message = message;
             ViewBag.Status = Status;
             return View(review);
+        }
+
+        [HttpGet]
+        public ActionResult GamesReviews()
+        {
+            IEnumerable<Review> review1 = reviews.Reviews;
+            ViewBag.Reviews = review1;
+            IEnumerable<Game> games2 = games.Games;
+            ViewBag.Games = games2;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult GamesRevievs(Review review)
+        {
+            DBContext db = new DBContext();
+            var gameId = review.GameId;
+            ViewBag.GameSelectId = gameId;
+            return View();
         }
     }
 }

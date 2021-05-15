@@ -3,10 +3,39 @@
     ViewBag.Title = "GamesReviews";
     Layout = null;
 }
+
+@helper CreateList(SelectList all)
+{
+    <ul>
+        @foreach (var s in all)
+        {
+            if (s.Value == ViewBag.GameSelectId)
+            {
+            <li>@s.Text</li>
+            }
+        }
+    </ul>
+}
+
+
+
+@{
+
+    var reviewList = new SelectList(ViewBag.Reviews, "GameId", "ReviewText");
+}
+
 <div>
     @Html.LabelFor(model => model.GameId, "Выбор игры", htmlAttributes: new { @class = "control-label col-md-2" })
     <div>
         @Html.DropDownListFor(model => model.GameId, new SelectList(ViewBag.Games, "GameId", "GameName"))
     </div>
+    <input type="submit", value="Показать отзывы">
 </div>
+
+@CreateList(reviewList)
+
+
+
+
+
 
