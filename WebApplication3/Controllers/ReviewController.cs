@@ -62,12 +62,20 @@ namespace WebApplication3.Controllers
         }
 
         [HttpPost]
-        public ActionResult GamesRevievs(Review review)
+        [ValidateAntiForgeryToken]
+        public ActionResult GamesReviews(Review review)
         {
             DBContext db = new DBContext();
-            var gameId = review.GameId;
-            ViewBag.GameSelectId = gameId;
-            return View();
+            bool Status = true;
+            string message = "Отзывы";
+            IEnumerable<Review> review1 = reviews.Reviews.Where(a => a.GameId == review.GameId);
+            
+            ViewBag.Reviews = review1;
+            IEnumerable<Game> games2 = games.Games;
+            ViewBag.Games = games2;
+            ViewBag.Message = message;
+            ViewBag.Status = Status;
+            return View(review);
         }
     }
 }
