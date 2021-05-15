@@ -3,12 +3,10 @@
     ViewBag.Title = "GamesReviews";
     Layout = null;
 }
-<h2>Отзывы</h2>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.GameId, "Выбор игры", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.GameId, new SelectList(ViewBag.Games, "GameId", "GameName"))
-        </div>
+<div>
+    @Html.LabelFor(model => model.GameId, "Выбор игры", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div>
+        @Html.DropDownListFor(model => model.GameId, new SelectList(ViewBag.Games, "GameId", "GameName"))
     </div>
+</div>
 
