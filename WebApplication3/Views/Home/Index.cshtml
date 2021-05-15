@@ -1,16 +1,39 @@
-﻿@{
+﻿@model WebApplication3.Models.Review
+@{
     ViewBag.Title = "Index";
 }
-<h2>Index</h2>
-Welcome @HttpContext.Current.User.Identity.Name
-@if (Request.IsAuthenticated)
-{
-    using (Html.BeginForm("Logout","User", FormMethod.Post, new { id="logoutForm"}))
-    {
-        <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
-    }
+<h2>Главная</h2>
+<nav>
+    Welcome @HttpContext.Current.User.Identity.Name
 
-}
-<div>
+    @if (Request.IsAuthenticated)
+    {
+        using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
+        {
+            <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+        }
+    }
     @Html.ActionLink("Написать отзыв", "Review", "Review")
-</div>
+
+</nav>
+
+@helper CreateList(IEnumerable<SelectListItem> all)
+{
+    <ul>
+        @foreach (var s in all)
+        {
+            <li>@s.Text</li>
+        }
+    </ul>
+}
+
+@{
+    int lastNum = ViewBag.PagesCount - 10;
+    var reviews = new SelectList(ViewBag.Reviews, "ReviewText", "ReviewText").Skip(lastNum).Take(10);
+}
+
+Всего отзывов - @ViewBag.PagesCount
+<h3>Последние отзывы</h3>
+@CreateList(reviews)
+
+

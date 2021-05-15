@@ -40,23 +40,13 @@ namespace WebApplication3.Controllers
                     dc.SaveChanges();
                     message = "Registration complete";
                     Status = true;
-
                 }
-
             }
             else message = "Invalid request";
-
             ViewBag.Message = message;
             ViewBag.Status = Status;
             return View(user);
-
         }
-
-        
-
-
-
-
 
         [HttpGet]
         public ActionResult Login()
@@ -83,9 +73,6 @@ namespace WebApplication3.Controllers
                         cookie.Expires = DateTime.Now.AddMinutes(timeout);
                         cookie.HttpOnly = true;
                         Response.Cookies.Add(cookie);
-
-
-
                         if (Url.IsLocalUrl(ReturnUrl))
                         {
                             return Redirect(ReturnUrl);
@@ -108,7 +95,6 @@ namespace WebApplication3.Controllers
             ViewBag.Message = message;
             return View();
         }
-
 
         [Authorize]
         [HttpPost]
