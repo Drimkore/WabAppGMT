@@ -3,47 +3,64 @@
     ViewBag.Title = "GamesReviews";
 }
 
-@helper CreateTable(SelectList review, SelectList user) 
+@helper CreateTable(SelectList review, SelectList user)
 {
-<table>
- 
-    <colgroup>
-        <col t/>
-
-    </colgroup>
-
-        @foreach (var s in review)
-        {
-            <td>
-                @s.Value
-            </td>
-            <td>
-                @s.Text
-            </td>
-
-        }
-        <td>
-            @foreach (var d in user)
-            {
-                @d.Value
-            }
-        </td>
-    </tr>
-
-
-    
-</table>
-    
+    <div class="container">
+        <div class="row">
+            <div class="col-1-2">
+                <table>
+                    <tr>
+                        <th>Имя пользователя</th>
+                    </tr>
+                    @foreach (var d in user)
+                    {
+                        <tr>
+                            <td>
+                                @d.Value
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <div class="col-1-2">
+                <table>
+                    <tr>
+                        <th>Оценка</th>
+                        <th>Отзыв</th>                        
+                    </tr>
+                    @foreach (var s in review)
+                    {
+                        <tr>
+                            <td>
+                                @s.Value
+                            </td>
+                            <td>
+                                @s.Text
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>            
+        </div>
+    </div>
 }
-
-
-
-
-
 
 @{
     var reviewList = new SelectList(ViewBag.Users, "ReviewScore", "ReviewText");
     var Range = new SelectList(ViewBag.Users, "UserId", "ReviewText");
+}
+
+@using (Html.BeginForm())
+{
+
+    @Html.AntiForgeryToken()
+    <div>
+        @Html.LabelFor(model => model.GameId, "Выбор игры", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div>
+            @Html.DropDownListFor(model => model.GameId, new SelectList(ViewBag.Games, "GameId", "GameName"))
+        </div>
+        <input type="submit" , value="Показать отзывы">
+    </div>
 }
 
 @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
@@ -51,52 +68,11 @@
     if (ViewBag.Message != null)
     {
         <div class="alert alert-success">
-            <strong>Success!</strong>{ 
-                @foreach(var a in Range)
-                    {
-                        @a.Value
-                    }
-            }
-            
-
+            <strong>Success!</strong>
         </div>
-       @CreateTable(reviewList, Range)
+        @CreateTable(reviewList, Range)
     }
-}
-
-@using (Html.BeginForm())
-{
-    
-    @Html.AntiForgeryToken()
-<div>
-    @Html.LabelFor(model => model.GameId, "Выбор игры", htmlAttributes: new { @class = "control-label col-md-2" })
-    <div>
-        @Html.DropDownListFor(model => model.GameId, new SelectList(ViewBag.Games, "GameId", "GameName"))
-    </div>
-    <input type="submit" , value="Показать отзывы">
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
+}  
 
 @section Scripts{
     <script src="~/Scripts/jquery.validate.min.js"></script>
