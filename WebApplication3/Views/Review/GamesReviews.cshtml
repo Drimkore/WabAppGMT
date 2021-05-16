@@ -3,24 +3,47 @@
     ViewBag.Title = "GamesReviews";
 }
 
-
-@helper CreateList(IEnumerable<WebApplication3.Models.Review> all)
+@helper CreateTable(SelectList review, SelectList user) 
 {
-    <ul>
-        @foreach (var s in all)
+<table>
+ 
+    <colgroup>
+        <col t/>
+
+    </colgroup>
+
+        @foreach (var s in review)
         {
-            {
-                <li>@s.ReviewScore @s.ReviewText </li>
-            }
+            <td>
+                @s.Value
+            </td>
+            <td>
+                @s.Text
+            </td>
+
         }
-    </ul>
+        <td>
+            @foreach (var d in user)
+            {
+                @d.Value
+            }
+        </td>
+    </tr>
+
+
+    
+</table>
+    
 }
 
 
 
+
+
+
 @{
-    var reviewList = new SelectList(ViewBag.Reviews, "GameId", "ReviewText");
-    var Range = new SelectList(ViewBag.Users, "Value", "Text");
+    var reviewList = new SelectList(ViewBag.Users, "ReviewScore", "ReviewText");
+    var Range = new SelectList(ViewBag.Users, "UserId", "ReviewText");
 }
 
 @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
@@ -31,13 +54,13 @@
             <strong>Success!</strong>{ 
                 @foreach(var a in Range)
                     {
-                        @a.Text
+                        @a.Value
                     }
             }
             
 
         </div>
-        @CreateList(ViewBag.Reviews)
+       @CreateTable(reviewList, Range)
     }
 }
 
