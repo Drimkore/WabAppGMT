@@ -15,6 +15,7 @@ namespace WebApplication3.Controllers
     {
         DBContext games = new DBContext();
         DBContext reviews = new DBContext();
+        DBContext users = new DBContext();
 
 
         // GET: Review
@@ -58,6 +59,8 @@ namespace WebApplication3.Controllers
             ViewBag.Reviews = review1;
             IEnumerable<Game> games2 = games.Games;
             ViewBag.Games = games2;
+            IEnumerable<User> user = users.Users;
+            ViewBag.Users = user;
             return View();
         }
 
@@ -69,12 +72,26 @@ namespace WebApplication3.Controllers
             bool Status = true;
             string message = "Отзывы";
             IEnumerable<Review> review1 = reviews.Reviews.Where(a => a.GameId == review.GameId);
-            
+            //string sqlCom = "select UserName from Users, Reviews where UsrId = UserId";
+            var UserId = db.Users.Take(3);
+            //SelectList Range = new SelectList(UserId, "UserId", "UserName");
+            ViewBag.Range = UserId;
             ViewBag.Reviews = review1;
             IEnumerable<Game> games2 = games.Games;
             ViewBag.Games = games2;
             ViewBag.Message = message;
             ViewBag.Status = Status;
+
+            IEnumerable<User> user = users.Users;
+            ViewBag.Users = user;
+
+            var sel1 = new SelectList(review1, "UserId", "UserId");
+            var sel2 = new SelectList(user, "UsrId", "UserName");
+
+
+            var result = sel1.Join(sel2, s1 => s1.Value, s2 => s2.Value, (s1, s2) => new {Text = s2.Text, Value = s1.Value});
+            ViewBag.Users = result;
+
             return View(review);
         }
     }

@@ -4,13 +4,13 @@
 }
 
 
-@helper CreateList(SelectList all)
+@helper CreateList(IEnumerable<WebApplication3.Models.Review> all)
 {
     <ul>
         @foreach (var s in all)
         {
             {
-                <li>@s.Text</li>
+                <li>@s.ReviewScore @s.ReviewText </li>
             }
         }
     </ul>
@@ -20,6 +20,7 @@
 
 @{
     var reviewList = new SelectList(ViewBag.Reviews, "GameId", "ReviewText");
+    var Range = new SelectList(ViewBag.Users, "Value", "Text");
 }
 
 @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
@@ -27,10 +28,16 @@
     if (ViewBag.Message != null)
     {
         <div class="alert alert-success">
-            <strong>Success!</strong>@ViewBag.Message
+            <strong>Success!</strong>{ 
+                @foreach(var a in Range)
+                    {
+                        @a.Text
+                    }
+            }
+            
 
         </div>
-        @CreateList(reviewList)
+        @CreateList(ViewBag.Reviews)
     }
 }
 
