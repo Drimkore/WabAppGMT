@@ -3,19 +3,27 @@
     ViewBag.Title = "Index";
 }
 <h2>Главная</h2>
-<nav>
-    Welcome @HttpContext.Current.User.Identity.Name
-
-    @if (Request.IsAuthenticated)
-    {
-        using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
-        {
-            <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+<div class="container">
+    <style>
+        nav {
+            display: flex;
+            flex-direction:column;
         }
-    }
-    @Html.ActionLink("Написать отзыв", "Review", "Review")
-    @Html.ActionLink("Просмотр отзывов", "GamesReviews", "Review")
-</nav>
+    </style>
+    <nav>
+        Welcome @HttpContext.Current.User.Identity.Name
+        @Html.ActionLink("Написать отзыв", "Review", "Review")
+        @Html.ActionLink("Просмотр отзывов", "GamesReviews", "Review")
+        @if (Request.IsAuthenticated)
+        {
+            using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
+            {
+                <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+            }
+        }
+
+    </nav>
+</div>
 
 @helper CreateList(IEnumerable<SelectListItem> all)
 {
@@ -31,9 +39,9 @@
     int lastNum = ViewBag.PagesCount - 10;
     var reviews = new SelectList(ViewBag.Reviews, "ReviewText", "ReviewText").Skip(lastNum).Take(10);
 }
-
-Всего отзывов - @ViewBag.PagesCount
-<h3>Последние отзывы</h3>
-@CreateList(reviews)
-
+<div>
+    <p>Всего отзывов - @ViewBag.PagesCount</p>
+    <h3>Последние отзывы</h3>
+    @CreateList(reviews)
+</div>
 
