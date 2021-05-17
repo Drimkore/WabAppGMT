@@ -14,7 +14,7 @@ namespace WebApplication3
     {
         protected void Application_Start()
         {
-            //Database.SetInitializer(new DbInitializer12()); «апускать, когда нужно изменить таблицы/модели.
+            //Database.SetInitializer(new DbInitializer12()); //«апускать, когда нужно изменить таблицы/модели.
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

@@ -13,5 +13,6 @@ namespace WebApplication3.Models
         public string GameName { get; set; }
         public string GameDiscription { get; set; }
         public string GameLink { get; set; }
+        public string SteamId { get; set; }
     }
 }

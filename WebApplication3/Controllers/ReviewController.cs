@@ -32,6 +32,10 @@ namespace WebApplication3.Controllers
         public ActionResult Review()
         {
             IEnumerable<Game> games1 = games.Games;
+            List<int> Scores = new List<int>();
+            for(int i = 1; i <=10; i++)
+            Scores.Add(i);
+            ViewBag.scores = Scores;
             SelectList games12 = new SelectList(games1, "GameId", "GameName");
             ViewBag.Games = games1;
             return View();
@@ -45,6 +49,14 @@ namespace WebApplication3.Controllers
             review.UserId = db.Users.Single(a => a.Email == Email).UsrId;
             bool Status = false;
             string message = "";
+            if (db.Reviews.Any(a => a.UserId == review.UserId && a.GameId == review.GameId))
+            {
+                message = "Повторный отзыв (Не Success)";
+                Status = true;
+                ViewBag.Message = message;
+                ViewBag.Status = Status;
+                return View(review);
+            }    
             if (ModelState.IsValid)
             {
                 using (DBContext dc = new DBContext())
