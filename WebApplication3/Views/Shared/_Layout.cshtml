@@ -8,33 +8,68 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+<body class="bg-dark text-white text-center">
+    <nav class="navbar">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Имя приложения", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
+            <style>
+                a {
+                    color: #dddddd;
+                    text-decoration: none;
+                }
+                a .active {
+                    color: white;
+                    border-bottom-color: #fff
+                }
+                    a:hover {
+                        color: #dddddd;
+                        border-bottom: solid;
+                        border-bottom-color: #dddddd;
+                        text-decoration: none;
+                    }
+
+                    a:focus {
+                        color: white;
+                        border-bottom: solid;
+                        border-bottom-color: white;
+                        text-decoration: none;
+                    }
+                nav a.active {
+                    color: white;
+                    border-bottom-color: #fff
+                }
+
+            </style>
+
+            @Html.ActionLink("Имя приложения", "Index", "Home", new { area = "" }, new { @class = "navbar-brand " })
+            <!--<div class="nav justify-content-around ">-->
+            @Html.ActionLink("Просмотр отзывов", "GamesReviews", "Review")
+            @if (Request.IsAuthenticated)
+            {
+                @Html.ActionLink("Написать отзыв", "Review", "Review")
+                using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
+                {
+                    <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+                }
+            }
+            <!--</div>-->
+
+
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                 </ul>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - мое приложение ASP.NET</p>
-        </footer>
-    </div>
+    </nav>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - мое приложение ASP.NET</p>
+            </footer>
+        </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-</body>
-</html>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
+    </html>
