@@ -10,6 +10,7 @@ namespace WebApplication3.Controllers
     public class HomeController : Controller
     {
         DBContext reviews = new DBContext();
+        DBContext games = new DBContext();
 
         // GET: Home
         [Authorize]
@@ -22,7 +23,17 @@ namespace WebApplication3.Controllers
 
             return View();
         }
+        [HttpPost]
+        public ActionResult WordSearch(string word)
+        {
+            var allReviews = reviews.Reviews.Where(a => a.Username.Contains(word)).ToList();
+            ViewBag.word = word;
+            if (allReviews.Count <= 0)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(allReviews);
 
-
+        }
     }
 }
