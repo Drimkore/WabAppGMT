@@ -5,37 +5,33 @@
 
 @helper CreateTable(List<WebApplication3.Models.Review> review)
 {
-<div class="container">
-    <div class="row">
-        @foreach (var d in review)
-        {
-        <div class="col-4">
-            <div class="card card_margin card_color">
-                <!--<img src="..." class="card-img-top" alt="...">-->
-                <div class="card-body">
-                    <h5 class="card-title">@d.Username  Оценка: @d.ReviewScore</h5>
-                    <p class="card-text text-truncate">@d.ReviewText</p>
-                    <a href="#exampleModal1" id="showModal" class="btn btn-outline-light stretched-link" data-toggle="modal" data-target="#modal-@d.ReviewId">Показать больше</a>
-                </div>
+<div class="container card_flex">
+    @foreach (var d in review)
+    {
+        <div class="card card_color" style="width: 300px; margin:10px">
+            <!--<img src="..." class="card-img-top" alt="...">-->
+            <div class="card-body">
+                <h5 class="card-title">@d.Username  Оценка: @d.ReviewScore</h5>
+                <p class="card-text text-truncate">@d.ReviewText</p>
+                <a href="#exampleModal1" id="showModal" class="btn btn-outline-light stretched-link" data-toggle="modal" data-target="#modal-@d.ReviewId">Показать больше</a>
             </div>
         </div>
-            <div id="modal-@d.ReviewId" class="modal fade" tabindex="-1">
-                <div class="modal-dialog modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header card_color">
-                            <h5 class="modal-title" id="exampleModalLabel">@d.Username  Оценка: @d.ReviewScore</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body card_color word_wrap">
-                            @d.ReviewText
-                        </div>
-                        <div class="modal-footer card_color">
-                        </div>
+        <div id="modal-@d.ReviewId" class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header card_color">
+                        <h5 class="modal-title" id="exampleModalLabel">@d.Username  Оценка: @d.ReviewScore</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body card_color word_wrap">
+                        @d.ReviewText 
+                    </div>
+                    <div class="modal-footer card_color">
                     </div>
                 </div>
             </div>
-        }
-    </div>
+        </div>        
+    }
 </div>
 }
 
@@ -86,12 +82,14 @@
 </script>
 
 <style type="text/css">
-    .card_color {
-        background-color: gray;
+    .card_flex {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
     }
 
-    .card_margin {
-        margin-top: 15px;
+    .card_color {
+        background-color: gray;
     }
 
     .word_wrap {
