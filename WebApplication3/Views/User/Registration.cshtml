@@ -3,7 +3,7 @@
     ViewBag.Title = "Registration";
 }
 <div>
-    <h2>Регистрация</h2>
+    
     @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
     {
         if (ViewBag.Message != null)
@@ -19,36 +19,37 @@
         {
             @Html.AntiForgeryToken()
 
-            <div class="form-horizontal">
+            <div class="form-signin">
+                <h2>Регистрация</h2>
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="form-signin">
+                    @*@Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    
+                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "pos", @placeholder = "Имя пользователя" } })
                         @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
-                    </div>
+                    
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="form-signin">
+                    @*@Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "pos", @placeholder = "Email адресс" } })
                         @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                         @Html.ValidationMessage("EmailExist", new { @class = "text-danger" })
-                    </div>
+                    
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="form-signin">
+                    @*@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "pos", @placeholder = "Пароль" } })
                         @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                    </div>
+                    
                 </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Create" class="btn btn-outline-light" />
+                
+                    <div>
+                        <input type="submit" value="Create" class="buttons" />
                     </div>
-                </div>
+                
             </div>
             if (ViewBag.Message != null)
             {
@@ -63,6 +64,45 @@
         @Html.ActionLink("Login", "Login")
     </div>
 </div>
+
+<style>
+    .form-signin {
+        width: 100%;
+        max-width: 300px;
+        padding: 15px;
+        margin: auto;
+    }
+
+    .pos {
+        width: 200px;
+        position: center;
+        padding-right: 15px;
+        padding-left: 15px;
+        background: #4c5866;
+        border: 1px solid;
+    }
+
+    .child {
+        height: 50px;
+        float: right;
+        width: 60%;
+        position: center;
+    }
+
+    .buttons {
+        width: 150px;
+        height: 50px;
+        text-decoration: none;
+        padding-top: 9px;
+        color: #241836;
+        text-align: center;
+        line-height: 20px;
+        font: normal 17px arial;
+        background: #002266;
+        border: 1px solid;
+    }
+    }
+</style>
 
 @section Scripts{
     <script src="~/Scripts/jquery.validate.min.js"></script>
