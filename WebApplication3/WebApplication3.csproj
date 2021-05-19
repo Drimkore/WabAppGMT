@@ -433,7 +433,6 @@
     <Content Include="Views\User\Registration.cshtml" />
     <Content Include="Views\Review\Review.cshtml" />
     <Content Include="Views\Review\GamesReviews.cshtml" />
-    <Content Include="Views\Home\WordSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

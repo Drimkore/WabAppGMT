@@ -33,6 +33,32 @@
         </div>        
     }
 </div>
+
+
+
+    <!--
+    <div class="container">
+        <div class="row">
+            <div class="col-1-2">
+                <table>
+                    <tr>
+                        <th>Имя пользователя</th>
+                    </tr>
+                    @foreach (var d in review)
+                    {
+                        <tr>
+                            <td>
+                                @d.Username
+                                @d.ReviewScore
+                                @d.ReviewText
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+        -->
 }
 
 @{
@@ -46,12 +72,7 @@
         <div>
             @Html.LabelFor(model => model.GameId, "Выбор игры", htmlAttributes: new { @class = "control-label col-md-2" })
             <div>
-               @Html.DropDownListFor(model => model.GameId, new SelectList(ViewBag.Games, "GameId", "GameName"),
-                    new
-                    {
-                        @class = "form-select"
-                    })
-
+                @Html.DropDownListFor(model => model.GameId, new SelectList(ViewBag.Games, "GameId", "GameName"))
             </div>
             <input type="submit" value="Показать отзывы" class="btn btn-light">
         </div>
@@ -72,14 +93,6 @@
     <script src="~/Scripts/jquery.validate.min.js"></script>
         <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 }
-<script>
-    $(document).ready(function () {
-        $('.selectpicker').selectpicker({
-            liveSearch: true,
-            showSubtext: true
-        });
-    });
-</script>
 
 <style type="text/css">
     .card_flex {
