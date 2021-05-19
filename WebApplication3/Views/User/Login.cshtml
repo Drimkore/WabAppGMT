@@ -3,52 +3,52 @@
 @{
     ViewBag.Title = "Login";
 }
-<h2>Login</h2>
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
+<div class="form-signin">
+    <h2>Login</h2>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @if (ViewBag.Message == "")
+    {
+        <div class="text-danger">*@ViewBag.Message</div>
+    }
+
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <div class="form-signin">
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "pos", @placeholder = "Email адресс" } })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+
+
+        </div>
+        @*@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })*@
     <div class="form-signin">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-        @if (ViewBag.Message == "")
-        {
-            <div class="text-danger">*@ViewBag.Message</div>
-        }
-
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email адресс" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" , @placeholder = "Пароль" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.RememberMe, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.RememberMe)
-                    @Html.ValidationMessageFor(model => model.RememberMe, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "pos", @placeholder = "Пароль" } })
+        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
     </div>
+        
+    
+
+    
+        <div class="col-md-10">
+            @Html.LabelFor(model => model.RememberMe, htmlAttributes: new { @class = "child" })
+            @Html.EditorFor(model => model.RememberMe )
+            @Html.ValidationMessageFor(model => model.RememberMe, "") 
+        </div>
+    
+
+    <div>
+            <input type="submit" value="Create" class="buttons" />
+     </div>
+        
+    </div>
+</div>
 }
 
 <div>
@@ -58,10 +58,38 @@
 <style>
     .form-signin {
         width: 100%;
-        max-width: 330px;
+        max-width: 300px;
         padding: 15px;
         margin: auto;
         }
+    .pos {
+        width: 200px;
+        position: center;
+        padding-right: 15px;
+        padding-left: 15px;
+        background: #4c5866;
+        border: 1px solid;
+    }
+    .child {
+        height: 50px;
+        float: right;
+        width: 60%;
+        position: center;
+    }
+    .buttons {
+        width: 150px;
+        height: 50px;
+        text-decoration: none;
+        padding-top: 9px;
+        color: #241836;
+        text-align: center;
+        line-height: 20px;
+        font: normal 17px arial;
+        background: #002266;
+        border: 1px solid;
+    }
+
+    }
 </style>
 
 @section Scripts{
