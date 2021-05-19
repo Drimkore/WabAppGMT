@@ -11,15 +11,6 @@ using System.Net;
 
 namespace WebApplication3.Controllers
 {
-    class ReviewShablon
-    {
-        public string UserId { get; set; }
-        public string GameId { get; set; }
-        public string ReviewScore { get; set; }
-        public string ReviewId { get; set; }
-        public string ReviewText { get; set; }
-
-    }
     public class ReviewController : Controller
     {
         DBContext games = new DBContext();
@@ -31,12 +22,11 @@ namespace WebApplication3.Controllers
         [HttpGet]
         public ActionResult Review()
         {
-            IEnumerable<Game> games1 = games.Games;
+            var games1 = games.Games;
             List<int> Scores = new List<int>();
             for(int i = 1; i <=10; i++)
             Scores.Add(i);
-            ViewBag.scores = Scores;
-            SelectList games12 = new SelectList(games1, "GameId", "GameName");
+            ViewBag.Scores = Scores;
             ViewBag.Games = games1;
             return View();
         }
@@ -46,18 +36,18 @@ namespace WebApplication3.Controllers
         {
             DBContext db = new DBContext();
             string Email = User.Identity.Name;
-            review.UsrId = db.Users.Single(a => a.Email == Email).UsrId;
-            review.UserName = db.Users.Single(a => a.Email == Email).Username;
+            review.Username = db.Users.Single(b => b.Email == Email).Username;
+            review.UserId = db.Users.Single(a => a.Email == Email).UsrId;
             bool Status = false;
             string message = "";
-            if (db.Reviews.Any(a => a.UsrId == review.UsrId && a.GameId == review.GameId))
+            if (db.Reviews.Any(a => a.UserId == review.UserId && a.GameId == review.GameId))
             {
                 message = "Повторный отзыв (Не Success)";
                 Status = true;
                 ViewBag.Message = message;
                 ViewBag.Status = Status;
                 return View(review);
-            }    
+            }
             if (ModelState.IsValid)
             {
                 using (DBContext dc = new DBContext())
