@@ -71,6 +71,8 @@ namespace WebApplication3.Controllers
             ViewBag.Reviews = review1;
             IEnumerable<Game> games2 = games.Games;
             ViewBag.Games = games2;
+            var games3 = games.Games.FirstOrDefault().GameName; 
+            ViewBag.Names = games3;
             IEnumerable<User> user = users.Users;
             ViewBag.Users = user;
             return View();

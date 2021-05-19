@@ -3,11 +3,22 @@
     ViewBag.Title = "Index";
 }
 <h2>Главная</h2>
+<div>
+    @using (Ajax.BeginForm("WordSearch", new AjaxOptions { UpdateTargetId = "results" }))
+    {
+        <input type="text" name="word" />
+        <input type="submit" name="Поиск" />
+    }
+    <div id="results"></div>
+    @ViewBag.word
+</div>
+@Scripts.Render("~/scripts/jquery-1.10.2.min.js")
+@Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
 <div class="container">
     <style>
         nav {
             display: flex;
-            flex-direction:column;
+            flex-direction: column;
         }
     </style>
     <nav>
