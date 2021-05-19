@@ -8,14 +8,29 @@
 <div class="container card_flex">
     @foreach (var d in review)
     {
-        <div class="card card_color" style="width: 30%;">
+        <div class="card card_color" style="width: 300px; margin:10px">
             <!--<img src="..." class="card-img-top" alt="...">-->
             <div class="card-body">
                 <h5 class="card-title">@d.Username  Оценка: @d.ReviewScore</h5>
                 <p class="card-text text-truncate">@d.ReviewText</p>
-                <a href="#" class="btn btn-outline-light stretched-link">Показать больше</a>
+                <a href="#exampleModal1" id="showModal" class="btn btn-outline-light stretched-link" data-toggle="modal" data-target="#modal-@d.ReviewId">Показать больше</a>
             </div>
         </div>
+        <div id="modal-@d.ReviewId" class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header card_color">
+                        <h5 class="modal-title" id="exampleModalLabel">@d.Username  Оценка: @d.ReviewScore</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body card_color word_wrap">
+                        @d.ReviewText 
+                    </div>
+                    <div class="modal-footer card_color">
+                    </div>
+                </div>
+            </div>
+        </div>        
     }
 </div>
 }
@@ -55,7 +70,7 @@
 </div>
 @section Scripts{
     <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 }
 <script>
     $(document).ready(function () {
@@ -71,9 +86,13 @@
         display: flex;
         flex-direction: row;
         justify-content: space-around;
-
     }
+
     .card_color {
-        background-color:gray;        
+        background-color: gray;
+    }
+
+    .word_wrap {
+        word-wrap:break-word;
     }
 </style>
