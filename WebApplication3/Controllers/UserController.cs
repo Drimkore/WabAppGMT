@@ -26,10 +26,10 @@ namespace WebApplication3.Controllers
             string message = "";
             if (ModelState.IsValid)
             {
-                var ifExist = IsEmailExist(user.Email);
+                var ifExist = IsEmailExist(user.Email, user.Username);
                 if (ifExist)
                 {
-                    ModelState.AddModelError("EmailExist", "Email already exist");
+                    ModelState.AddModelError("EmailExist", "Выберите другой Email или Username");
                     return View(user);
                 }
                 user.Password = Crypto.Hash(user.Password);
@@ -105,14 +105,14 @@ namespace WebApplication3.Controllers
         }
 
         [NonAction]
-        public bool IsEmailExist(string Email)
+        public bool IsEmailExist(string Email, string Username)
         {
             using (DBContext dc = new DBContext())
             {
+                var u = dc.Users.Where(a => a.Username == Username).FirstOrDefault();
                 var v = dc.Users.Where(a => a.Email == Email).FirstOrDefault();
-                return v != null;
+                return v != null || u != null;
             }
         }
-
     }
 }

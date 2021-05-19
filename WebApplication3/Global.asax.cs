@@ -10,7 +10,7 @@ using WebApplication3.Models;
 
 namespace WebApplication3
 {
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
         protected void Application_Start()
         {

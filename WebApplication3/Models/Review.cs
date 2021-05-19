@@ -10,13 +10,9 @@ namespace WebApplication3.Models
     public class Review
     {
         [Key]
-        [Column(Order = 1)]
         public int ReviewId { get; set; }
-        [Key]
-        [Column(Order = 2)]
         public int UserId { get; set; }
-        [Key]
-        [Column(Order = 3)]
+        public string Username { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Выберите игру")]
         public int GameId { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Введите вашу оценку (0-10)")]
