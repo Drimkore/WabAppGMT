@@ -46,10 +46,11 @@ namespace WebApplication3.Controllers
         {
             DBContext db = new DBContext();
             string Email = User.Identity.Name;
-            review.UserId = db.Users.Single(a => a.Email == Email).UsrId;
+            review.UsrId = db.Users.Single(a => a.Email == Email).UsrId;
+            review.UserName = db.Users.Single(a => a.Email == Email).Username;
             bool Status = false;
             string message = "";
-            if (db.Reviews.Any(a => a.UserId == review.UserId && a.GameId == review.GameId))
+            if (db.Reviews.Any(a => a.UsrId == review.UsrId && a.GameId == review.GameId))
             {
                 message = "Повторный отзыв (Не Success)";
                 Status = true;
@@ -92,28 +93,12 @@ namespace WebApplication3.Controllers
             DBContext db = new DBContext();
             bool Status = true;
             string message = "Отзывы";
+            ViewBag.Message = message;
+            ViewBag.Status = Status;
             var review1 = reviews.Reviews.Where(a => a.GameId == review.GameId).ToList();
-            //string sqlCom = "select UserName from Users, Reviews where UsrId = UserId";
-            var UserId = db.Users.Take(3);
-            //SelectList Range = new SelectList(UserId, "UserId", "UserName");
-            ViewBag.Range = UserId;
             ViewBag.Reviews = review1;
             IEnumerable<Game> games2 = games.Games;
             ViewBag.Games = games2;
-            ViewBag.Message = message;
-            ViewBag.Status = Status;
-
-            IEnumerable<User> user = users.Users;
-            ViewBag.Users = user;
-
-            var sel1 = new SelectList(review1, "UserId", "UserId");
-            var sel2 = new SelectList(user, "UsrId", "UserName");
-
-
-            var result = sel1.Join(sel2, s1 => s1.Value, s2 => s2.Value, (s1, s2) => new {Text = s2.Text, Value = s1.Value}).ToList();
-            var resultNames = review1.AsQueryable().Join(result, s1 => s1.UserId.ToString(), s2 => s2.Value, (s1, s2) => new { UserId = s2.Text, GameId = s1.GameId, ReviewScore = s1.ReviewScore, ReviewId = s1.ReviewId, ReviewText = s1.ReviewText});
-            ViewBag.Users = resultNames;
-
             return View(review);
         }
     }

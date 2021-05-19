@@ -14,11 +14,16 @@ namespace WebApplication3.Models
         public int ReviewId { get; set; }
         [Key]
         [Column(Order = 2)]
-        public int UserId { get; set; }
+        public int UsrId { get; set; }
+        public User User { get; set; }
         [Key]
         [Column(Order = 3)]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Выберите игру")]
+
         public int GameId { get; set; }
+        public Game Game { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Введите Username")]
+        public string UserName { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Введите вашу оценку (0-10)")]
         public int ReviewScore { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Введите ваш отзыв")]

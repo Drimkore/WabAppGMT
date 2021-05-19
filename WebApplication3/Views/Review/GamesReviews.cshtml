@@ -3,7 +3,7 @@
     ViewBag.Title = "GamesReviews";
 }
 
-@helper CreateTable(SelectList review, SelectList user)
+@helper CreateTable(List<WebApplication3.Models.Review> review)
 {
     <div class="container">
         <div class="row">
@@ -12,42 +12,24 @@
                     <tr>
                         <th>Имя пользователя</th>
                     </tr>
-                    @foreach (var d in user)
+                    @foreach (var d in review)
                     {
                         <tr>
                             <td>
-                                @d.Value
+                                @d.UserName
+                                @d.ReviewScore
+                                @d.ReviewText
                             </td>
                         </tr>
                     }
                 </table>
-            </div>
-            <div class="col-1-2">
-                <table>
-                    <tr>
-                        <th>Оценка</th>
-                        <th>Отзыв</th>                        
-                    </tr>
-                    @foreach (var s in review)
-                    {
-                        <tr>
-                            <td>
-                                @s.Value
-                            </td>
-                            <td>
-                                @s.Text
-                            </td>
-                        </tr>
-                    }
-                </table>
-            </div>            
+            </div>    
         </div>
     </div>
 }
 
 @{
-    var reviewList = new SelectList(ViewBag.Users, "ReviewScore", "ReviewText");
-    var Range = new SelectList(ViewBag.Users, "UserId", "ReviewText");
+    var reviewList = new List<WebApplication3.Models.Review>(ViewBag.Reviews);
 }
 
 @using (Html.BeginForm())
@@ -70,7 +52,7 @@
         <div class="alert alert-success">
             <strong>Success!</strong>
         </div>
-        @CreateTable(reviewList, Range)
+        @CreateTable(reviewList);
     }
 }  
 
