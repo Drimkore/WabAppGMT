@@ -5,6 +5,23 @@
 
 @helper CreateTable(List<WebApplication3.Models.Review> review)
 {
+<div class="container card_flex">
+    @foreach (var d in review)
+    {
+        <div class="card card_color" style="width: 30%;">
+            <!--<img src="..." class="card-img-top" alt="...">-->
+            <div class="card-body">
+                <h5 class="card-title">@d.Username  Оценка: @d.ReviewScore</h5>
+                <p class="card-text text-truncate">@d.ReviewText</p>
+                <a href="#" class="btn btn-outline-light stretched-link">Показать больше</a>
+            </div>
+        </div>
+    }
+</div>
+
+
+
+    <!--
     <div class="container">
         <div class="row">
             <div class="col-1-2">
@@ -23,40 +40,53 @@
                         </tr>
                     }
                 </table>
-            </div>    
+            </div>
         </div>
     </div>
+        -->
 }
 
 @{
     var reviewList = new List<WebApplication3.Models.Review>(ViewBag.Reviews);
 }
-
-@using (Html.BeginForm())
-{
-
-    @Html.AntiForgeryToken()
-    <div>
-        @Html.LabelFor(model => model.GameId, "Выбор игры", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div>
-            @Html.DropDownListFor(model => model.GameId, new SelectList(ViewBag.Games, "GameId", "GameName"))
-        </div>
-        <input type="submit" , value="Показать отзывы">
-    </div>
-}
-
-@if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
-{
-    if (ViewBag.Message != null)
+<div>
+    @using (Html.BeginForm())
     {
-        <div class="alert alert-success">
-            <strong>Success!</strong>
-        </div>
-        @CreateTable(reviewList);
-    }
-}  
 
+        @Html.AntiForgeryToken()
+        <div>
+            @Html.LabelFor(model => model.GameId, "Выбор игры", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div>
+                @Html.DropDownListFor(model => model.GameId, new SelectList(ViewBag.Games, "GameId", "GameName"))
+            </div>
+            <input type="submit" value="Показать отзывы" class="btn btn-light">
+        </div>
+    }
+
+    @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
+    {
+        if (ViewBag.Message != null)
+        {
+            <div class="alert alert-success">
+                <strong>Success!</strong>
+            </div>
+            @CreateTable(reviewList);
+        }
+    }
+</div>
 @section Scripts{
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 }
+
+<style type="text/css">
+    .card_flex {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+
+    }
+    .card_color {
+        background-color:gray;        
+    }
+</style>
