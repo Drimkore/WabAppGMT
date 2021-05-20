@@ -12,7 +12,7 @@
     <nav class="navbar navbar-dark">
         <div class="container">
 
-            @Html.ActionLink("Имя приложения", "Index", "Home", new { area = "" }, new { @class = "navbar-brand " })
+            @Html.ActionLink("GaMeta", "Index", "Home", new { area = "" }, new { @class = "navbar-brand " })
             <!--<div class="nav justify-content-around ">-->
             @Html.ActionLink("Просмотр отзывов", "GamesReviews", "Review")
             @if (Request.IsAuthenticated)
@@ -36,7 +36,7 @@
     </div>
     <div class="flex-pos"></div>
     <footer class="text-center">
-        <p>&copy; @DateTime.Now.Year - мое приложение ASP.NET</p>
+        <p>&copy; @DateTime.Now.Year - GaMeta - Здесь могла быть ссылка на нас...</p>
     </footer>
 
     @Scripts.Render("~/bundles/jquery")
