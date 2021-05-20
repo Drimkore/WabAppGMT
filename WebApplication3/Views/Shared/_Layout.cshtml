@@ -10,9 +10,9 @@
 </head>
 <body class="bg-dark text-white text-center direction_flex">
     <nav class="navbar navbar-dark">
-        <div class="container">
+        <div class="container" style="height:50px;width:690px;">
 
-            @Html.ActionLink("GaMeta", "Index", "Home", new { area = "" }, new { @class = "navbar-brand " })
+            @Html.ActionLink("GaMeta", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             <!--<div class="nav justify-content-around ">-->
             @Html.ActionLink("Просмотр отзывов", "GamesReviews", "Review")
             @if (Request.IsAuthenticated)
@@ -35,7 +35,7 @@
         <hr />
     </div>
     <div class="flex-pos"></div>
-    <footer class="text-center">
+    <footer class="text-center" style="color:gray;">
         <p>&copy; @DateTime.Now.Year - GaMeta - Здесь могла быть ссылка на нас...</p>
     </footer>
 

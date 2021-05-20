@@ -2,56 +2,48 @@
 @{
     ViewBag.Title = "Index";
 }
-<h2>Главная</h2>
+<div>
+    <h2>Главная</h2>
 
+
+
+    <div class="container">
+        <nav>
+            Welcome @HttpContext.Current.User.Identity.Name
+            @using (Ajax.BeginForm("WordSearch", new AjaxOptions { UpdateTargetId = "results" }))
+            {
+                <input type="text" name="word" />
+                <input type="submit" name="Поиск" class="btn btn-outline-light" value="Поиск" />
+            }
+            <div id="results"></div>
+        </nav>
+    </div>
+
+    @helper CreateList(IEnumerable<SelectListItem> all)
+    {
+        <ul>
+            @foreach (var s in all)
+            {
+                <li class="text-truncate">@s.Text</li>
+            }
+        </ul>
+    }
+
+    @{
+        int lastNum = ViewBag.PagesCount - 10;
+        var reviews = new SelectList(ViewBag.Reviews, "ReviewText", "ReviewText").Skip(lastNum).Take(10);
+    }
+    <div>        
+        <h4>Последние отзывы</h4>
+        @CreateList(reviews)
+    </div>
+</div>
 @Scripts.Render("~/scripts/jquery-3.6.0.min.js")
 @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
-    
-<div class="container">
-    <style>
-        nav {
-            display: flex;
-            flex-direction: column;
-        }
-    </style>
-    <nav>
-        Welcome @HttpContext.Current.User.Identity.Name
-        @using (Ajax.BeginForm("WordSearch", new AjaxOptions { UpdateTargetId = "results" }))
-        {
-            <input type="text" name="word" />
-            <input type="submit" name="Поиск" />
-        }
-        <div id="results"></div>
-        @Html.ActionLink("Написать отзыв", "Review", "Review")
-        @Html.ActionLink("Просмотр отзывов", "GamesReviews", "Review")
-        @if (Request.IsAuthenticated)
-        {
-            using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
-            {
-                <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
-            }
-        }
 
-    </nav>
-</div>
-
-@helper CreateList(IEnumerable<SelectListItem> all)
-{
-    <ul>
-        @foreach (var s in all)
-        {
-            <li>@s.Text</li>
-        }
-    </ul>
-}
-
-@{
-    int lastNum = ViewBag.PagesCount - 10;
-    var reviews = new SelectList(ViewBag.Reviews, "ReviewText", "ReviewText").Skip(lastNum).Take(10);
-}
-<div>
-    <p>Всего отзывов - @ViewBag.PagesCount</p>
-    <h3>Последние отзывы</h3>
-    @CreateList(reviews)
-</div>
-
+<style>
+    nav {
+        display: flex;
+        flex-direction: column;
+    }
+</style>
