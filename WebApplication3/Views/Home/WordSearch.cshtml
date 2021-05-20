@@ -1,15 +1,15 @@
-﻿﻿@model IEnumerable<WebApplication3.Models.Review>
+﻿@model IEnumerable<WebApplication3.Models.Review>
 
-<div id="searchresults">
-    <h3>
-        Все отзывы от : @Model.First().Username
-    </h3>
-    <ul>
-        @foreach (var item in Model)
-        {
-            <li>
-                @item.ReviewText
-            </li>
-        }
-    </ul>
-</div>
+    <div>
+        <h3>
+            Результат поиска
+        </h3>
+        <ul>
+            @foreach (var item in Model)
+            {
+                <li>
+                    @item.ReviewText
+                </li>
+            }
+        </ul>
+    </div>
