@@ -19,7 +19,6 @@ namespace WebApplication3.Controllers
             ViewBag.Reviews = review1;
             var pagesCount = review1.Count();
             ViewBag.PagesCount = pagesCount;
-
             return View();
         }
     }

@@ -13,13 +13,15 @@ namespace WebApplication3.Models
         public int ReviewId { get; set; }
         public int UserId { get; set; }
         public string Username { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Выберите игру")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Выберите игру(id)")]
         public int GameId { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Введите вашу оценку (0-10)")]
         public int ReviewScore { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Введите ваш отзыв")]
         [MinLength(10, ErrorMessage = "Отзыв должен состоять как минимум из 10 символов")]
         public string ReviewText { get; set; }
+        public DateTime ReviewTime { get; set; }
+        public string Game { get; set; }
     }
 
 }

@@ -38,6 +38,8 @@ namespace WebApplication3.Controllers
             string Email = User.Identity.Name;
             review.Username = db.Users.Single(b => b.Email == Email).Username;
             review.UserId = db.Users.Single(a => a.Email == Email).UsrId;
+            review.Game = db.Games.Single(a => a.GameId == review.GameId).GameName;
+            review.ReviewTime = DateTime.Today;
             bool Status = false;
             string message = "";
             if (db.Reviews.Any(a => a.UserId == review.UserId && a.GameId == review.GameId))
@@ -94,9 +96,21 @@ namespace WebApplication3.Controllers
             return View(review);
         }
         [HttpPost]
-        public ActionResult WordSearch(string word)
+        public ActionResult WordSearch(string word, int choose)
         {
-            var allReviews = reviews.Reviews.Where(a => a.Username.Contains(word)).ToList();
+            List<Review> allReviews = new List<Review>();
+            if (choose == 1)
+            {
+                allReviews = reviews.Reviews.Where(a => a.Username.Contains(word)).ToList();
+            }
+            if (choose == 2)
+            {
+                allReviews = reviews.Reviews.Where(a => a.ReviewText.Contains(word)).ToList();
+            }
+            if (choose == 3)
+            {
+                allReviews = reviews.Reviews.Where(a => a.Game.Contains(word)).ToList();
+            }
             if (allReviews.Count <= 0)
             {
                 return HttpNotFound();

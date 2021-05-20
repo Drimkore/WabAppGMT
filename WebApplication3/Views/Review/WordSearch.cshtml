@@ -11,7 +11,7 @@
                     <div class="card-body">
                         <h5 class="card-title">@d.Username  Оценка: @d.ReviewScore</h5>
                         <p class="card-text text-truncate">@d.ReviewText</p>
-                        <a href="#exampleModal1" id="showModal" class="btn btn-outline-light stretched-link" data-toggle="modal" data-target="#modal-@d.ReviewId">Показать больше</a>
+                        <a href="#exampleModal1" id="showModal" class="btn btn-outline-light stretched-link" data-bs-toggle="modal" data-bs-target="#modal-@d.ReviewId">Показать больше</a>
                     </div>
                 </div>
             </div>
@@ -26,6 +26,8 @@
                             @d.ReviewText
                         </div>
                         <div class="modal-footer card_color">
+                            @d.Game
+                            @d.ReviewTime.Date
                         </div>
                     </div>
                 </div>
