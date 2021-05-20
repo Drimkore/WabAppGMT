@@ -26,11 +26,10 @@ namespace WebApplication3.Controllers
         public ActionResult WordSearch(string word) 
         { 
             var allReviews = reviews.Reviews.Where(a => a.Username.Contains(word)).ToList(); 
-            ViewBag.word = word; 
             if (allReviews.Count <= 0) 
-            { 
+            {
                 return HttpNotFound(); 
-            } 
+            }
             return PartialView(allReviews); 
         }
     }
