@@ -3,78 +3,70 @@
     ViewBag.Title = "GamesReviews";
 }
 
-@helper CreateTable(List<WebApplication3.Models.Review> review)
-{
-    <div class="container">
-        <div class="row">
-            @foreach (var d in review)
-            {
-                <div class="col-4">
-                    <div class="card card_margin card_color">
-                        <!--<img src="..." class="card-img-top" alt="...">-->
-                        <div class="card-body">
-                            <h5 class="card-title">@d.Username  Оценка: @d.ReviewScore</h5>
-                            <p class="card-text text-truncate">@d.ReviewText</p>
-                            <a href="#exampleModal1" id="showModal" class="btn btn-outline-light stretched-link" data-toggle="modal" data-target="#modal-@d.ReviewId">Показать больше</a>
-                        </div>
-                    </div>
-                </div>
-                <div id="modal-@d.ReviewId" class="modal fade" tabindex="-1">
-                    <div class="modal-dialog modal-dialog-scrollable">
-                        <div class="modal-content">
-                            <div class="modal-header card_color">
-                                <h5 class="modal-title" id="exampleModalLabel">@d.Username  Оценка: @d.ReviewScore</h5>                                
-                            </div>
-                            <div class="modal-body card_color word_wrap">
-                                @d.ReviewText
-                            </div>
-                            <div class="modal-footer card_color">
+@*@helper CreateTable(List<WebApplication3.Models.Review> review)
+    {
+        <div class="container">
+            <div class="row">
+                @foreach (var d in review)
+                {
+                    <div class="col-4">
+                        <div class="card card_margin card_color">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">@d.Username  Оценка: @d.ReviewScore</h5>
+                                <p class="card-text text-truncate">@d.ReviewText</p>
+                                <a href="#exampleModal1" id="showModal" class="btn btn-outline-light stretched-link" data-toggle="modal" data-target="#modal-@d.ReviewId">Показать больше</a>
                             </div>
                         </div>
                     </div>
-                </div>
-            }
+                    <div id="modal-@d.ReviewId" class="modal fade" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header card_color">
+                                    <h5 class="modal-title" id="exampleModalLabel">@d.Username  Оценка: @d.ReviewScore</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body card_color word_wrap">
+                                    @d.ReviewText
+                                </div>
+                                <div class="modal-footer card_color">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
         </div>
-    </div>
-}
+    }*@
 
 @{
     var reviewList = new List<WebApplication3.Models.Review>(ViewBag.Reviews);
 }
 <div>
-    @using (Html.BeginForm())
+    @using (Ajax.BeginForm("WordSearch", new AjaxOptions { UpdateTargetId = "results" }))
     {
-
-        @Html.AntiForgeryToken()
-        <div class="row">
-            @Html.LabelFor(model => model.GameId, "Выбор игры:", htmlAttributes: new { @class = "control-label col-2" })
-            <div class="col-1">
-                @Html.DropDownListFor(model => model.GameId, new SelectList(ViewBag.Games, "GameId", "GameName"),
-                     new
-                     {
-                         @class = "form-select"
-                     })
-
-            </div>
-            <input type="submit" value="Показать отзывы" class="btn btn-outline-light col-2">
-        </div>
+        <input type="text" name="word" />
+        <input type="submit" name="Поиск" />
     }
+    <div id="results"></div>
 
-    @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
-    {
-        if (ViewBag.Message != null)
+    @*@if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
         {
-            <div class="alert alert-success">
-                <strong>Success!</strong>
-            </div>
-            @CreateTable(reviewList);
-        }
-    }
+            if (ViewBag.Message != null)
+            {
+                <div class="alert alert-success">
+                    <strong>Success!</strong>
+                </div>
+                @CreateTable(reviewList);
+            }
+        }*@
 </div>
 @section Scripts{
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 }
+@Scripts.Render("~/scripts/jquery-3.6.0.min.js")
+@Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
 <script>
     $(document).ready(function () {
         $('.selectpicker').selectpicker({

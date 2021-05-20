@@ -14,23 +14,13 @@ namespace WebApplication3.Controllers
         // GET: Home
         [Authorize]
         public ActionResult Index()
-        {       
+        {
             IEnumerable<Review> review1 = reviews.Reviews;
             ViewBag.Reviews = review1;
             var pagesCount = review1.Count();
             ViewBag.PagesCount = pagesCount;
 
             return View();
-        }
-        [HttpPost]
-        public ActionResult WordSearch(string word) 
-        { 
-            var allReviews = reviews.Reviews.Where(a => a.Username.Contains(word)).ToList(); 
-            if (allReviews.Count <= 0) 
-            {
-                return HttpNotFound(); 
-            }
-            return PartialView(allReviews); 
         }
     }
 }

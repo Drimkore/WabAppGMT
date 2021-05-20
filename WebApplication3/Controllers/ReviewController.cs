@@ -93,5 +93,15 @@ namespace WebApplication3.Controllers
             ViewBag.Games = games2;
             return View(review);
         }
+        [HttpPost]
+        public ActionResult WordSearch(string word)
+        {
+            var allReviews = reviews.Reviews.Where(a => a.Username.Contains(word)).ToList();
+            if (allReviews.Count <= 0)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(allReviews);
+        }
     }
 }

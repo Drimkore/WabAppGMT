@@ -10,12 +10,6 @@
     <div class="container">
         <nav>
             Welcome @HttpContext.Current.User.Identity.Name
-            @using (Ajax.BeginForm("WordSearch", new AjaxOptions { UpdateTargetId = "results" }))
-            {
-                <input type="text" name="word" />
-                <input type="submit" name="Поиск" class="btn btn-outline-light" value="Поиск" />
-            }
-            <div id="results"></div>
         </nav>
     </div>
 
