@@ -9,7 +9,7 @@
         @Html.AntiForgeryToken()
 
     <div class="form-signin">
-        <h2>Login</h2>
+        <h2>Вход</h2>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -53,7 +53,7 @@
     }
 
     <div>
-        @Html.ActionLink("Register Now", "Registration", "User")
+        @Html.ActionLink("Создать аккаунт", "Registration", "User")
     </div>
 </div>
 <style>

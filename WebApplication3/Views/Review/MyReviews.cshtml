@@ -13,44 +13,51 @@
             @foreach (var d in review)
 
             {
-                <div class="col-4">
-                    <div class="card card_margin card_color">
-                        <!--<img src="..." class="card-img-top" alt="...">-->
-                        <div class="card-body">
-                            <h5 class="card-title">@d.Username  Оценка: @d.ReviewScore</h5>
-                            <p class="card-text text-truncate">@d.ReviewText</p>
-                            <a href="#exampleModal1" id="showModal" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#modal-@d.ReviewId">Редактировать</a>
+            <div class="col-4">
+                <div class="card border-warning card_margin card_color" style="margin-bottom: 30px; margin-left: 15px; margin-right: 15px;">
+                    <!--<img src="..." class="card-img-top" alt="...">-->
+                    <div class="card-body ">
+                        <h5 class="modal-title" id="gameModalLabel" style="color:#ffd800; font-weight:600;">@d.Game </h5>
+                        <div>
+                            <h5 class="card-title">@d.Username  </h5>
+                            <h5 class="card-title" style="margin-bottom:30px;">Оценка: @d.ReviewScore</h5>
                         </div>
+                        <p class="card-text text-truncate" style="margin-bottom:30px;">@d.ReviewText</p>
+                        <a href="#exampleModal1" id="showModal" class="btn btn-outline-warning stretched-link" data-bs-toggle="modal" data-bs-target="#modal-@d.ReviewId" style="margin-bottom:30px;">Показать больше</a>
                     </div>
                 </div>
-                <div id="modal-@d.ReviewId" class="modal fade" tabindex="-1">
-                    <div class="modal-dialog" style="width:100vh; max-width:none !important">
-                        <div class="modal-content">
-                            <div class="modal-header card_color">
-                                <h5 class="modal-title" id="exampleModalLabel">@d.Username  Оценка: @d.ReviewScore</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
+            </div>
+            <div id="modal-@d.ReviewId" class="modal fade border-warning" tabindex="-1">
+                <div class="modal-dialog modal-dialog-scrollable" style="width:100vh; max-width:none !important">
+                    <div class="modal-content">
+                        <div class="modal-header card_color">
+
+                            <h5 class="modal-title" id="gameModalLabel" style="color:#ffd800; font-weight:600;">@d.Game </h5>
+                            <h5 class="modal-title" id="exampleModalLabel" style="margin-left:100px">@d.Username  Оценка: @d.ReviewScore</h5>
+
+
+                        </div>
+                        <div class="card_color">
+                            @Html.DropDownListFor(model => model.ReviewScore, new SelectList(ViewBag.Scores), new { @id = "Score" + d.ReviewId, @class= "form-select dropdown-menu-dark btn btn-secondary"})
+                            @Html.Hidden("ReviewId", d.ReviewId, new { @id = "ReviewId" + d.ReviewId })
+                            @Html.Hidden("Game", d.Game, new { @id = "Game" + d.ReviewId })
+                            @Html.Hidden("GameId", d.GameId, new { @id = "GameId" + d.ReviewId })
+                            @Html.Hidden("UserId", d.UserId, new { @id = "UserId" + d.ReviewId })
+                            @Html.Hidden("Username", d.Username, new { @id = "Review" + d.ReviewId })
+                            @Html.TextArea("ReviewText", d.ReviewText, new { @minlength = 10, @class = "form-control textarea_true textinput", @id = "Text" + d.ReviewId })
+                        </div>
+                        <div class="modal-footer card_color">
                             <div>
-                                @Html.DropDownListFor(model => model.ReviewScore, new SelectList(ViewBag.Scores), new { @id = "Score"+d.ReviewId })
-                                    @Html.Hidden("ReviewId", d.ReviewId, new { @id = "ReviewId" + d.ReviewId })
-                                    @Html.Hidden("Game", d.Game, new { @id = "Game"+d.ReviewId })
-                                    @Html.Hidden("GameId", d.GameId, new { @id = "GameId"+d.ReviewId })
-                                    @Html.Hidden("UserId", d.UserId, new { @id = "UserId"+d.ReviewId })
-                                    @Html.Hidden("Username", d.Username, new { @id = "Review"+d.ReviewId })
-                                    @Html.TextArea("ReviewText", d.ReviewText, new { @minlength = 10, @class = "form-control textinput", @id = "Text"+d.ReviewId })
+                                <button type="submit" name="choose" class="btn btn-light">Редактировать отзыв</button>
                             </div>
-                            <div class="modal-footer card_color">
-                                <div>
-                                    <button type="submit" name="choose" class="btn btn-light">Редактировать отзыв</button>
-                                </div>
-                                @d.ReviewText
-                                @d.Game
-                                @d.ReviewId
-                                @d.ReviewTime
-                            </div>
+                            @d.ReviewText
+                            @d.Game
+                            @d.ReviewId
+                            @d.ReviewTime
                         </div>
                     </div>
                 </div>
+            </div>
             }
         </div>
     </div>
@@ -78,7 +85,7 @@
 
 <style type="text/css">
     .card_color {
-        background-color: gray;
+        background-color: #303030;
     }
 
     .card_margin {
@@ -98,6 +105,19 @@
         min-height: inherit;
         height: 70vh;
     }
+    .textarea_true {
+        background-color: #303030;
+        border: 0px;
+        color: white;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+        .textarea_true:focus {
+            background-color: #303030;
+            border: 0px;
+            color: white;
+        }
 </style>
 @section Scripts{
     <script src="~/Scripts/jquery.validate.min.js"></script>

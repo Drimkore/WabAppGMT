@@ -26,29 +26,29 @@
                 <div class="form-signin">
                     @*@Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })*@
                     
-                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "pos", @placeholder = "Имя пользователя" } })
-                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "pos border-warning form_color", @placeholder = "Имя пользователя" } })
+                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "danger_color" })
                     
                 </div>
                 <div class="form-signin">
                     @*@Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })*@
                     
-                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "pos", @placeholder = "Email адресс" } })
-                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                        @Html.ValidationMessage("EmailExist", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "pos border-warning form_color", @placeholder = "Email адресс" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "danger_color" })
+                        @Html.ValidationMessage("EmailExist", new { @class = "danger_color" })
                     
                 </div>
                 <div class="form-signin">
                     @*@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })*@
                     
-                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "pos", @placeholder = "Пароль" } })
-                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "pos border-warning form_color", @placeholder = "Пароль" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "danger_color" })
                     
                 </div>
                 
-                    <div>
-                        <input type="submit" value="Create" class="btn btn-outline-light buttons" />
-                    </div>
+                <div>
+                    <input type="submit" value="Зарегистрироваться" class="buttons btn btn-outline-warning border-warning" />
+                </div>
                 
             </div>
             if (ViewBag.Message != null)
@@ -61,7 +61,7 @@
     }
 
     <div>
-        @Html.ActionLink("Login", "Login")
+        @Html.ActionLink("Войти в существующий аккаунт", "Login")
     </div>
 </div>
 
@@ -89,18 +89,24 @@
         position: center;
     }
 
-    .buttons {
-        width: 150px;
+    .buttons {        
         height: 50px;
         text-decoration: none;
-        padding-top: 9px;
-        color: #fff;
+        padding-top: 9px;   
         text-align: center;
         line-height: 20px;
         font: normal 17px arial;
         background: none;
         border: 1px solid;
     }
+    .form_color {
+        color: #ffd800;
+        background-color: transparent;
+        border: 2px solid;
+    }
+
+    .danger_color {
+        color: #f91b1b
     }
 </style>
 
