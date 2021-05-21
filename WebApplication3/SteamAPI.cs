@@ -6,7 +6,7 @@ using System.Net;
 using System.Web;
 using System.Xml;
 
-namespace testapp2
+namespace WebApplication3
 {
     public class UsersGamesInfo
     {
