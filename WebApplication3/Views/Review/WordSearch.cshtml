@@ -6,12 +6,12 @@
         @foreach (var d in Model)
         {
             <div class="col-4">
-                <div class="card card_margin card_color">
+                <div class="card border-warning card_margin card_color">
                     <!--<img src="..." class="card-img-top" alt="...">-->
                     <div class="card-body">
                         <h5 class="card-title">@d.Username  Оценка: @d.ReviewScore</h5>
                         <p class="card-text text-truncate">@d.ReviewText</p>
-                        <a href="#exampleModal1" id="showModal" class="btn btn-outline-light stretched-link" data-bs-toggle="modal" data-bs-target="#modal-@d.ReviewId">Показать больше</a>
+                        <a href="#exampleModal1" id="showModal" class="btn btn-outline-warning stretched-link" data-bs-toggle="modal" data-bs-target="#modal-@d.ReviewId">Показать больше</a>
                     </div>
                 </div>
             </div>
@@ -35,9 +35,9 @@
         }
     </div>
 </div>
-<style type="text/css">
+<style>
     .card_color {
-        background-color: gray;
+        background-color: #303030;
     }
 
     .card_margin {

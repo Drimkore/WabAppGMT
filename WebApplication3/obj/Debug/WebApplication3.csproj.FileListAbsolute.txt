@@ -968,3 +968,10 @@ C:\WEBAPP\WabAppGMT\WebApplication3\bin\Quartz.dll
 C:\WEBAPP\WabAppGMT\WebApplication3\bin\System.Diagnostics.DiagnosticSource.dll
 C:\WEBAPP\WabAppGMT\WebApplication3\bin\Quartz.xml
 C:\WEBAPP\WabAppGMT\WebApplication3\bin\System.Diagnostics.DiagnosticSource.xml
+D:\ProjectGit\WabAppGMT\WebApplication3\bin\HtmlAgilityPack.dll
+D:\ProjectGit\WabAppGMT\WebApplication3\bin\Quartz.dll
+D:\ProjectGit\WabAppGMT\WebApplication3\bin\System.Diagnostics.DiagnosticSource.dll
+D:\ProjectGit\WabAppGMT\WebApplication3\bin\HtmlAgilityPack.pdb
+D:\ProjectGit\WabAppGMT\WebApplication3\bin\HtmlAgilityPack.xml
+D:\ProjectGit\WabAppGMT\WebApplication3\bin\Quartz.xml
+D:\ProjectGit\WabAppGMT\WebApplication3\bin\System.Diagnostics.DiagnosticSource.xml

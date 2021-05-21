@@ -21,7 +21,7 @@
         <div class="form-group">
             @*@Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="form-signin">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "pos", @placeholder = "Email адресс" } })
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "pos border-warning form_color", @placeholder = "Email адресс" } })
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
 
 
@@ -29,7 +29,7 @@
             </div>
             @*@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="form-signin">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "pos", @placeholder = "Пароль" } })
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "pos border-warning form_color", @placeholder = "Пароль" } })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
 
@@ -47,7 +47,7 @@
 
         </div>
         <div>
-            <input type="submit" value="Create" class="buttons btn btn-outline-light" />
+            <input type="submit" value="Create" class="buttons btn btn-outline-warning border-warning" />
         </div>
     </div>
     }
@@ -81,12 +81,16 @@
         height: 50px;
         text-decoration: none;
         padding-top: 9px;
-        color: #fff;
         text-align: center;
         line-height: 20px;
         font: normal 17px arial;
         background:none;
         border: 1px solid;
+    }
+    .form_color {
+        color: #ffd800;
+        background-color:transparent;
+        border: 2px solid;
     }
 
     }

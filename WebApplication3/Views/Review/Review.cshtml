@@ -3,6 +3,7 @@
     ViewBag.Title = "Review";
 }
 <div>
+    <hr />
     <h2>Публикация отзыва</h2>
     <!--Добро пожаловать, HttpContext.Current.User.Identity.Name -->
     @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
@@ -21,30 +22,30 @@
             @Html.AntiForgeryToken()
 
             <div class="form-horizontal">
-                <hr />
+                
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
                     @Html.LabelFor(model => model.GameId, "Выбор игры", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownListFor(model => model.GameId, new SelectList(ViewBag.Games, "GameId", "GameName"))
+                    <div class="">
+                        @Html.DropDownListFor(model => model.GameId, new SelectList(ViewBag.Games, "GameId", "GameName"), htmlAttributes: new { @class = "form-select dropdown-menu-dark btn btn-secondary" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.ReviewScore, "Оценка", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownListFor(model => model.ReviewScore, new SelectList(ViewBag.Scores))
+                    <div class="">
+                        @Html.DropDownListFor(model => model.ReviewScore, new SelectList(ViewBag.Scores), htmlAttributes: new { @class = "form-select dropdown-menu-dark btn btn-secondary" })
                         @Html.ValidationMessageFor(model => model.ReviewScore, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.ReviewText, "Ваш отзыв", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.ReviewText, new { htmlAttributes = new { @class = "form-control" } })
+                    <div class="">
+                        @Html.TextAreaFor(model => model.ReviewText, htmlAttributes: new { @class = "form-control textarea_true" })
                         @Html.ValidationMessageFor(model => model.ReviewText, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
+                    <div class="">
                         <input type="submit" value="Опубликовать" class="btn btn-outline-light" />
                     </div>
                 </div>
@@ -70,3 +71,21 @@
 }
 
 
+<style type="text/css">
+    option:hover {
+        background-color: darkgrey;
+    }
+
+    .textarea_true {
+        background-color: #565e64;
+        border: 0px;
+        color: white;
+        max-width: inherit !important;
+    }
+        .textarea_true:focus {
+            background-color: #565e64;
+            border: 0px;
+            color: white;
+            max-width: inherit !important;
+        }
+</style>
