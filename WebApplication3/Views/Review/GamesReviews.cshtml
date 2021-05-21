@@ -38,9 +38,7 @@
             </div>
         </div>
     }*@
-@{
-    var reviewList = new List<WebApplication3.Models.Review>(ViewBag.Reviews);
-}
+
     @using (Ajax.BeginForm("WordSearch", new AjaxOptions { UpdateTargetId = "results" }))
     {
 <div class="input-group">

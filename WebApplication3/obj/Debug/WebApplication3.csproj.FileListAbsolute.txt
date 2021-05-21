@@ -961,3 +961,6 @@ C:\Users\vsleo\Source\Repos\WabAppGMT2\WebApplication3\obj\Debug\WebApplication3
 C:\Users\vsleo\Source\Repos\WabAppGMT2\WebApplication3\obj\Debug\WebApplication3.csproj.CopyComplete
 C:\Users\vsleo\Source\Repos\WabAppGMT2\WebApplication3\obj\Debug\WebApplication3.dll
 C:\Users\vsleo\Source\Repos\WabAppGMT2\WebApplication3\obj\Debug\WebApplication3.pdb
+C:\WEBAPP\WabAppGMT\WebApplication3\bin\HtmlAgilityPack.dll
+C:\WEBAPP\WabAppGMT\WebApplication3\bin\HtmlAgilityPack.pdb
+C:\WEBAPP\WabAppGMT\WebApplication3\bin\HtmlAgilityPack.xml
