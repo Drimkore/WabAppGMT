@@ -33,12 +33,15 @@
     </nav>
     <div class="container body-content direction_flex">
         @RenderBody()
-        <hr />
+        
     </div>
     <div class="flex-pos"></div>
     <footer class="text-center" style="color:gray;">
+        <hr />
         <p>&copy; @DateTime.Now.Year - GaMeta - Здесь могла быть ссылка на нас...</p>
     </footer>
+
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/scripts/bootstrap")
@@ -53,7 +56,10 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        height: 100vh;
+    }
+
+    html, body {
+        height: 100%;
     }
 
     .hed {
