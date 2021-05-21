@@ -68,11 +68,19 @@ namespace WebApplication3
             {
                 return new GameInfo("NTE", "", "");
             }
-            var name = node.InnerText.Trim();
+            var name = node.InnerText.Trim().Replace("&amp;", "&");
             node = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='game_description_snippet']");
-            var descr = node.InnerText.Trim();
+            if (node == null)
+            {
+                return new GameInfo("NTE", "", "");
+            }
+            var descr = node.InnerText.Trim().Replace("&amp;", "&");
             node = htmlDoc.DocumentNode.SelectSingleNode("//img[@class='game_header_image_full']");
-            var img = node.Attributes["src"].Value.Trim();
+            if (node == null)
+            {
+                return new GameInfo("NTE", "", "");
+            }
+            var img = node.Attributes["src"].Value.Trim().Replace("&amp;", "&");
             return new GameInfo(name, img, descr);
         }
         public static UsersGamesInfo GetUsersGamesInfo(string userID)

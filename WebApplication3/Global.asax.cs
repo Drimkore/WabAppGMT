@@ -7,6 +7,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Data.Entity;
 using WebApplication3.Models;
+using WebApplication3.Jobs;
 
 namespace WebApplication3
 {
@@ -20,6 +21,8 @@ namespace WebApplication3
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            GameAdderScheduler.Start();
         }
     }
 }
