@@ -29,8 +29,8 @@ namespace WebApplication3.Jobs
                         GameDiscription = game.GetDescription(),
                         GameLink = "https://store.steampowered.com/app/" + i.Key
                     });
+                    db.SaveChanges();
                 }
-                db.SaveChanges();
             }
 
 
