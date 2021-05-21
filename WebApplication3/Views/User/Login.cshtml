@@ -22,7 +22,7 @@
             @*@Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="form-signin">
                 @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "pos border-warning form_color", @placeholder = "Email адресс" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "danger_color" })
 
 
 
@@ -30,7 +30,7 @@
             @*@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="form-signin">
                 @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "pos border-warning form_color", @placeholder = "Пароль" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "danger_color" })
             </div>
 
 
@@ -47,7 +47,7 @@
 
         </div>
         <div>
-            <input type="submit" value="Create" class="buttons btn btn-outline-warning border-warning" />
+            <input type="submit" value="Войти" class="buttons btn btn-outline-warning border-warning" />
         </div>
     </div>
     }
@@ -91,6 +91,9 @@
         color: #ffd800;
         background-color:transparent;
         border: 2px solid;
+    }
+    .danger_color {
+        color: #f91b1b
     }
 
     }
