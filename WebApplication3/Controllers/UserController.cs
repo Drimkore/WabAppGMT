@@ -73,7 +73,7 @@ namespace WebApplication3.Controllers
             else message = "Invalid request";
             ViewBag.Message = message;
             ViewBag.Status = Status;
-            AddingG();
+            //AddingG();
             return View(user);
         }
 

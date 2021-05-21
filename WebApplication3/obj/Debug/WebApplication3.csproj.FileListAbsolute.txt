@@ -964,3 +964,7 @@ C:\Users\vsleo\Source\Repos\WabAppGMT2\WebApplication3\obj\Debug\WebApplication3
 C:\WEBAPP\WabAppGMT\WebApplication3\bin\HtmlAgilityPack.dll
 C:\WEBAPP\WabAppGMT\WebApplication3\bin\HtmlAgilityPack.pdb
 C:\WEBAPP\WabAppGMT\WebApplication3\bin\HtmlAgilityPack.xml
+C:\WEBAPP\WabAppGMT\WebApplication3\bin\Quartz.dll
+C:\WEBAPP\WabAppGMT\WebApplication3\bin\System.Diagnostics.DiagnosticSource.dll
+C:\WEBAPP\WabAppGMT\WebApplication3\bin\Quartz.xml
+C:\WEBAPP\WabAppGMT\WebApplication3\bin\System.Diagnostics.DiagnosticSource.xml

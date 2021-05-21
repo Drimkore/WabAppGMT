@@ -70,8 +70,16 @@ namespace WebApplication3
             }
             var name = node.InnerText.Trim();
             node = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='game_description_snippet']");
+            if (node == null)
+            {
+                return new GameInfo("NTE", "", "");
+            }
             var descr = node.InnerText.Trim();
             node = htmlDoc.DocumentNode.SelectSingleNode("//img[@class='game_header_image_full']");
+            if (node == null)
+            {
+                return new GameInfo("NTE", "", "");
+            }
             var img = node.Attributes["src"].Value.Trim();
             return new GameInfo(name, img, descr);
         }
