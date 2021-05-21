@@ -17,21 +17,28 @@
                     <div class="card-body">
                         <h5 class="card-title">@d.Username  Оценка: @d.ReviewScore</h5>
                         <p class="card-text text-truncate">@d.ReviewText</p>
-                        <a href="#exampleModal1" id="showModal" class="btn btn-outline-light stretched-link" data-bs-toggle="modal" data-bs-target="#modal-@d.ReviewId">Показать больше</a>
-                    </div>
+                        <a href="#exampleModal1" id="showModal" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#modal-@d.ReviewId">Редактировать</a>
+                    </div>                    
                 </div>
             </div>
             <div id="modal-@d.ReviewId" class="modal fade" tabindex="-1">
-                <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-dialog" style="width:100vh; max-width:none !important">
                     <div class="modal-content">
                         <div class="modal-header card_color">
                             <h5 class="modal-title" id="exampleModalLabel">@d.Username  Оценка: @d.ReviewScore</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body card_color word_wrap">
-                            @d.ReviewText
+                        <div>
+                            @Html.DropDownListFor(model => model.ReviewScore, new SelectList(ViewBag.Scores))
+                            @Html.ValidationMessageFor(model => model.ReviewScore, "", new { @class = "text-danger" })
+                        </div>
+                        <div calss="card_color">
+                            <textarea class="form-control" style="max-width:inherit !important; min-height:inherit; height:70vh;" >@d.ReviewText</textarea>
                         </div>
                         <div class="modal-footer card_color">
+                            <div>
+                                <button type="button" id="editReview" class="btn btn-light">Редактировать отзыв</button>
+                            </div>
                             @d.Game
                             @d.ReviewTime.Date
                         </div>
@@ -51,6 +58,10 @@
 
     .card_margin {
         margin-top: 15px;
+    }
+
+    .modal_height {
+        height:80vh;
     }
 
     .word_wrap {

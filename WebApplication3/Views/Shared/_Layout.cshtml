@@ -17,6 +17,7 @@
             @Html.ActionLink("Просмотр отзывов", "GamesReviews", "Review")
             @if (Request.IsAuthenticated)
             {
+                @Html.ActionLink("Мои отзывы", "MyReviews", "Review")
                 @Html.ActionLink("Написать отзыв", "Review", "Review")
                 using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
                 {

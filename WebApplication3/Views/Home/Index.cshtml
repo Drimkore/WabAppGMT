@@ -22,22 +22,78 @@
             }
         </ul>
     }
+    @helper CreateTable(List<WebApplication3.Models.Review> review)
+    {
+        <div class="container">
+            <div class="row">
+                @foreach (var d in review)
+                {
+                    <div class="col-4">
+                        <div class="card card_margin card_color">
+                            <!--<img src="..." class="card-img-top" alt="...">-->
+                            <div class="card-body">
+                                <h5 class="card-title">@d.Username  Оценка: @d.ReviewScore</h5>
+                                <p class="card-text text-truncate">@d.ReviewText</p>
+                                <a href="#exampleModal1" id="showModal" class="btn btn-outline-light stretched-link" data-bs-toggle="modal" data-bs-target="#modal-@d.ReviewId">Показать больше</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="modal-@d.ReviewId" class="modal fade" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header card_color">
+                                    <h5 class="modal-title" id="exampleModalLabel">@d.Username  Оценка: @d.ReviewScore</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body card_color word_wrap">
+                                    @d.ReviewText
+                                </div>
+                                <div class="modal-footer card_color">
+                                    @d.Game
+                                    @d.ReviewTime.Date
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
 
     @{
         int lastNum = ViewBag.PagesCount - 10;
         var reviews = new SelectList(ViewBag.Reviews, "ReviewText", "ReviewText").Skip(lastNum).Take(10);
+        var reviewList = new List<WebApplication3.Models.Review>(ViewBag.Reviews);
     }
-    <div>        
+    <div>
         <h4>Последние отзывы</h4>
-        @CreateList(reviews)
+        @CreateTable(reviewList)
     </div>
 </div>
 @Scripts.Render("~/scripts/jquery-3.6.0.min.js")
 @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+@section Scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    @*  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>*@
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+}
 
 <style>
     nav {
         display: flex;
         flex-direction: column;
+    }
+    
+    .card_color {
+        background-color: gray;
+    }
+
+    .card_margin {
+        margin-top: 15px;
+    }
+
+    .word_wrap {
+        word-wrap: break-word;
     }
 </style>
