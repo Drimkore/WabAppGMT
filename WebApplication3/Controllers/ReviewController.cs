@@ -122,6 +122,10 @@ namespace WebApplication3.Controllers
         [HttpGet]
         public ActionResult MyReviews()
         {
+            List<int> Scores = new List<int>();
+            for (int i = 1; i <= 10; i++)
+                Scores.Add(i);
+            ViewBag.Scores = Scores;
             var Email = User.Identity.Name;
             var Username = reviews.Users.Single(a => a.Email == Email).Username;
             var reviewsMy = reviews.Reviews.Where(a => a.Username.Equals(Username)).ToList();
