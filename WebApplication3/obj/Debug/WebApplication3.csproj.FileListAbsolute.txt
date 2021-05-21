@@ -968,6 +968,11 @@ C:\WEBAPP\WabAppGMT\WebApplication3\bin\Quartz.dll
 C:\WEBAPP\WabAppGMT\WebApplication3\bin\System.Diagnostics.DiagnosticSource.dll
 C:\WEBAPP\WabAppGMT\WebApplication3\bin\Quartz.xml
 C:\WEBAPP\WabAppGMT\WebApplication3\bin\System.Diagnostics.DiagnosticSource.xml
+C:\WEBAPP\WabAppGMT\WebApplication3\bin\System.Net.Http.Formatting.dll
+C:\WEBAPP\WabAppGMT\WebApplication3\bin\System.Web.Http.xml
+C:\WEBAPP\WabAppGMT\WebApplication3\bin\System.Net.Http.Formatting.xml
+C:\WEBAPP\WabAppGMT\WebApplication3\bin\ru\System.Web.Http.resources.dll
+C:\WEBAPP\WabAppGMT\WebApplication3\bin\ru\System.Net.Http.Formatting.resources.dll
 D:\ProjectGit\WabAppGMT\WebApplication3\bin\HtmlAgilityPack.dll
 D:\ProjectGit\WabAppGMT\WebApplication3\bin\Quartz.dll
 D:\ProjectGit\WabAppGMT\WebApplication3\bin\System.Diagnostics.DiagnosticSource.dll
