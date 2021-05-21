@@ -7,49 +7,74 @@
 @{ var reviewList = new List<WebApplication3.Models.Review>(ViewBag.MyReviews);}
 @helper CreateTable(List<WebApplication3.Models.Review> review)
 {
-<div class="container">
-    <div class="row">
-        @foreach (var d in review)
-        {
-            <div class="col-4">
-                <div class="card card_margin card_color">
-                    <!--<img src="..." class="card-img-top" alt="...">-->
-                    <div class="card-body">
-                        <h5 class="card-title">@d.Username  Оценка: @d.ReviewScore</h5>
-                        <p class="card-text text-truncate">@d.ReviewText</p>
-                        <a href="#exampleModal1" id="showModal" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#modal-@d.ReviewId">Редактировать</a>
-                    </div>                    
-                </div>
-            </div>
-            <div id="modal-@d.ReviewId" class="modal fade" tabindex="-1">
-                <div class="modal-dialog" style="width:100vh; max-width:none !important">
-                    <div class="modal-content">
-                        <div class="modal-header card_color">
-                            <h5 class="modal-title" id="exampleModalLabel">@d.Username  Оценка: @d.ReviewScore</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div>
-                            @Html.DropDownListFor(model => model.ReviewScore, new SelectList(ViewBag.Scores))
-                            @Html.ValidationMessageFor(model => model.ReviewScore, "", new { @class = "text-danger" })
-                        </div>
-                        <div calss="card_color">
-                            <textarea class="form-control" style="max-width:inherit !important; min-height:inherit; height:70vh;" >@d.ReviewText</textarea>
-                        </div>
-                        <div class="modal-footer card_color">
-                            <div>
-                                <button type="button" id="editReview" class="btn btn-light">Редактировать отзыв</button>
-                            </div>
-                            @d.Game
-                            @d.ReviewTime.Date
+
+    <div class="container">
+        <div class="row">   
+            @foreach (var d in review)
+
+            {
+                <div class="col-4">
+                    <div class="card card_margin card_color">
+                        <!--<img src="..." class="card-img-top" alt="...">-->
+                        <div class="card-body">
+                            <h5 class="card-title">@d.Username  Оценка: @d.ReviewScore</h5>
+                            <p class="card-text text-truncate">@d.ReviewText</p>
+                            <a href="#exampleModal1" id="showModal" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#modal-@d.ReviewId">Редактировать</a>
                         </div>
                     </div>
                 </div>
-            </div>
-        }
+                <div id="modal-@d.ReviewId" class="modal fade" tabindex="-1">
+                    <div class="modal-dialog" style="width:100vh; max-width:none !important">
+                        <div class="modal-content">
+                            <div class="modal-header card_color">
+                                <h5 class="modal-title" id="exampleModalLabel">@d.Username  Оценка: @d.ReviewScore</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div>
+                                @Html.DropDownListFor(model => model.ReviewScore, new SelectList(ViewBag.Scores), new { @id = "Score"+d.ReviewId })
+                                    @Html.Hidden("ReviewId", d.ReviewId, new { @id = "ReviewId" + d.ReviewId })
+                                    @Html.Hidden("Game", d.Game, new { @id = "Game"+d.ReviewId })
+                                    @Html.Hidden("GameId", d.GameId, new { @id = "GameId"+d.ReviewId })
+                                    @Html.Hidden("UserId", d.UserId, new { @id = "UserId"+d.ReviewId })
+                                    @Html.Hidden("Username", d.Username, new { @id = "Review"+d.ReviewId })
+                                    @Html.TextArea("ReviewText", d.ReviewText, new { @minlength = 10, @class = "form-control textinput", @id = "Text"+d.ReviewId })
+                            </div>
+                            <div class="modal-footer card_color">
+                                <div>
+                                    <button type="submit" name="choose" class="btn btn-light">Редактировать отзыв</button>
+                                </div>
+                                @d.ReviewText
+                                @d.Game
+                                @d.ReviewId
+                                @d.ReviewTime
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
     </div>
-</div>
 }
-@CreateTable(reviewList)
+@*<script>
+    function getInputs(text)
+    {
+        var gameId = document.getElementById("Text" + text).value;
+        alert(gameId);
+        fetch(`/Review/MyReviews/${gameId}`, {
+            method: 'POST',
+            headers: new Headers(),
+            body: String(gameId)
+        })
+            .then(response => response.json())
+            .then(response => alert(response))
+    }
+</script>*@
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @CreateTable(reviewList)
+}
 
 <style type="text/css">
     .card_color {
@@ -61,11 +86,17 @@
     }
 
     .modal_height {
-        height:80vh;
+        height: 80vh;
     }
 
     .word_wrap {
         word-wrap: break-word;
+    }
+
+    .textinput {
+        max-width: inherit !important;
+        min-height: inherit;
+        height: 70vh;
     }
 </style>
 @section Scripts{

@@ -8,6 +8,7 @@ using WebApplication3.Models;
 using System.Web.Security;
 using System.Net.Mail;
 using System.Net;
+using System.IO;
 
 namespace WebApplication3.Controllers
 {
@@ -19,18 +20,18 @@ namespace WebApplication3.Controllers
 
 
         // GET: Review
-        [HttpGet]
+        [System.Web.Mvc.HttpGet]
         public ActionResult Review()
         {
             var games1 = games.Games;
             List<int> Scores = new List<int>();
-            for(int i = 1; i <=10; i++)
-            Scores.Add(i);
+            for (int i = 1; i <= 10; i++)
+                Scores.Add(i);
             ViewBag.Scores = Scores;
             ViewBag.Games = games1;
             return View();
         }
-        [HttpPost]
+        [System.Web.Mvc.HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Review(Review review)
         {
@@ -66,21 +67,21 @@ namespace WebApplication3.Controllers
             return View(review);
         }
 
-        [HttpGet]
+        [System.Web.Mvc.HttpGet]
         public ActionResult GamesReviews()
         {
             IEnumerable<Review> review1 = reviews.Reviews;
             ViewBag.Reviews = review1;
             IEnumerable<Game> games2 = games.Games;
             ViewBag.Games = games2;
-            var games3 = games.Games.FirstOrDefault().GameName; 
+            var games3 = games.Games.FirstOrDefault().GameName;
             ViewBag.Names = games3;
             IEnumerable<User> user = users.Users;
             ViewBag.Users = user;
             return View();
         }
 
-        [HttpPost]
+        [System.Web.Mvc.HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GamesReviews(Review review)
         {
@@ -95,7 +96,7 @@ namespace WebApplication3.Controllers
             ViewBag.Games = games2;
             return View(review);
         }
-        [HttpPost]
+        [System.Web.Mvc.HttpPost]
         public ActionResult WordSearch(string word, int choose)
         {
             List<Review> allReviews = new List<Review>();
@@ -116,10 +117,10 @@ namespace WebApplication3.Controllers
                 return HttpNotFound();
             }
             return PartialView(allReviews);
-            
-            
+
+
         }
-        [HttpGet]
+        [System.Web.Mvc.HttpGet]
         public ActionResult MyReviews()
         {
             List<int> Scores = new List<int>();
@@ -131,6 +132,27 @@ namespace WebApplication3.Controllers
             var reviewsMy = reviews.Reviews.Where(a => a.Username.Equals(Username)).ToList();
             ViewBag.MyReviews = reviewsMy;
             return View();
+        }
+        [System.Web.Mvc.HttpPost]
+        public ActionResult Myreviews( Review review)
+        {
+            var changedreview = reviews.Reviews.Single(a => a.ReviewId.Equals(review.ReviewId));
+            changedreview.ReviewScore = review.ReviewScore;
+            changedreview.ReviewText = review.ReviewText;
+            changedreview.ReviewTime = DateTime.Today;
+            reviews.SaveChanges();
+            List<int> Scores = new List<int>();
+            for (int i = 1; i <= 10; i++)
+                Scores.Add(i);
+            ViewBag.Scores = Scores;
+            var Email = User.Identity.Name;
+            var Username = reviews.Users.Single(a => a.Email == Email).Username;
+            var reviewsMy = reviews.Reviews.Where(a => a.Username.Equals(Username)).ToList();
+            ViewBag.MyReviews = reviewsMy;
+
+
+            return View();
+
         }
     }
 }
