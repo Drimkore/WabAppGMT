@@ -13,6 +13,34 @@ namespace WebApplication3.Controllers
 {
     public class UserController : Controller
     {
+        private void AddingG()
+        {
+            var gamer = SteamAPI.GetUsersGamesInfo("76561198091848209");
+            using (DBContext db = new DBContext())
+            {
+                var counter = 0;
+                foreach (var i in gamer.GetGamesIDnTime())
+                {
+                    if (db.Games.Any(u => u.SteamId == i.Key))
+                        continue;
+                    if (counter > 20) break;
+                    var game = SteamAPI.GetGameInfo(i.Key);
+                    if (game.GetName() == "NTE")
+                        continue;
+                    counter++;
+                    db.Games.Add(new Game
+                    {
+
+                        SteamId = i.Key,
+                        GameName = game.GetName(),
+                        GameDiscription = game.GetDescription(),
+                        GameLink = "https://store.steampowered.com/app/" + i.Key
+                    });
+
+                }
+                db.SaveChanges();
+            }
+        }
         [HttpGet]
         public ActionResult Registration()
         {
@@ -45,6 +73,7 @@ namespace WebApplication3.Controllers
             else message = "Invalid request";
             ViewBag.Message = message;
             ViewBag.Status = Status;
+            AddingG();
             return View(user);
         }
 
