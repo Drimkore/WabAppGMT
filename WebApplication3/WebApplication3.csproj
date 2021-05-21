@@ -463,6 +463,7 @@
     <Content Include="Views\Review\Review.cshtml" />
     <Content Include="Views\Review\GamesReviews.cshtml" />
     <Content Include="Views\Review\WordSearch.cshtml" />
+    <Content Include="Views\Review\MyReviews.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
