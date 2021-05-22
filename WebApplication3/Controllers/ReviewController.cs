@@ -134,12 +134,18 @@ namespace WebApplication3.Controllers
             return View();
         }
         [System.Web.Mvc.HttpPost]
-        public ActionResult Myreviews( Review review)
+        public ActionResult Myreviews( List<Review> review)
         {
-            var changedreview = reviews.Reviews.Single(a => a.ReviewId.Equals(review.ReviewId));
-            changedreview.ReviewScore = review.ReviewScore;
-            changedreview.ReviewText = review.ReviewText;
-            changedreview.ReviewTime = DateTime.Today;
+            foreach (var l in review)
+            {
+                var changedreview = reviews.Reviews.Single(a => a.ReviewId.Equals(l.ReviewId));
+                if (l.ReviewText != null)
+                {
+                    changedreview.ReviewScore = l.ReviewScore;
+                    changedreview.ReviewText = l.ReviewText;
+                    changedreview.ReviewTime = DateTime.Today;
+                }
+            }
             reviews.SaveChanges();
             List<int> Scores = new List<int>();
             for (int i = 1; i <= 10; i++)

@@ -1309,3 +1309,7 @@ C:\WEBAPP2\WabAppGMT\WebApplication3\obj\Debug\WebApplication3.csproj.CoreCompil
 C:\WEBAPP2\WabAppGMT\WebApplication3\obj\Debug\WebApplication3.csproj.CopyComplete
 C:\WEBAPP2\WabAppGMT\WebApplication3\obj\Debug\WebApplication3.dll
 C:\WEBAPP2\WabAppGMT\WebApplication3\obj\Debug\WebApplication3.pdb
+C:\Users\vsleo\source\repos\WabAppGMT2\WebApplication3\bin\Quartz.dll
+C:\Users\vsleo\source\repos\WabAppGMT2\WebApplication3\bin\System.Diagnostics.DiagnosticSource.dll
+C:\Users\vsleo\source\repos\WabAppGMT2\WebApplication3\bin\Quartz.xml
+C:\Users\vsleo\source\repos\WabAppGMT2\WebApplication3\bin\System.Diagnostics.DiagnosticSource.xml
