@@ -2,10 +2,10 @@
 @{
     ViewBag.Title = "Index";
 }
+
 <div>
     <hr />
     <h2>Главная</h2>
-
 
 
     <div class="container">
@@ -61,7 +61,7 @@
                                 <div class="card_color">
 
                                 </div>
-                                <li>
+                                <div class="card_color">
                                     @{
                                         int userid = Convert.ToInt32(Session["ID"]);
 
@@ -71,14 +71,20 @@
                                         }
                                         else if (review.Any(x => x.UserId == userid && x.ReviewId == review[i].ReviewId) || Ajax.ViewBag.Liked == true)
                                         {
-                                            <a href="javascript:void(0)" class="unlike" data-id="@review[i].ReviewId"><i class="btn btn-outline-warning"></i><span>(@review[i].Rating)u</span></a>
+                                            <a href="javascript:void(0)" class="unlike" data-id="@review[i].ReviewId">
+                                                <i class="far fa-heart"></i>
+                                                <span>(@review[i].Rating.ToString())u</span>
+                                            </a>
                                         }
                                         else
                                         {
-                                            <a href="javascript:void(0)" class="like" data-id="@review[i].ReviewId"><i class="fa fa-heart-o fa-lg"></i><span>(@review[i].Rating)l</span></a>
+                                            <a href="javascript:void(0)" class="like" data-id="@review[i].ReviewId">
+                                                <i class="far fa-heart"></i>
+                                                <span>(@review[i].Rating.ToString())l</span>
+                                            </a>
                                         }
                                     }
-                                </li>
+                                </div>
                                 <div class="modal-footer card_color">
                                     Оценка: @review[i].Rating
                                     @review[i].Game
@@ -91,37 +97,38 @@
                 }
             </div>
         </div>
-}
+    }
 
 
-        @{
-            int lastNum = ViewBag.PagesCount - 12;
-            var reviews = new SelectList(ViewBag.Reviews, "ReviewText", "ReviewText").Skip(lastNum).Take(12);
-            var reviewList = new List<WebApplication3.Models.Review>(ViewBag.Reviews);
-            var likesList = new List<WebApplication3.Models.Like>(ViewBag.Likes);
-        }
-        <div>
-            <h4>Последние отзывы</h4>
-            @CreateTable(reviewList, likesList)
-        </div>
+    @{
+        int lastNum = ViewBag.PagesCount - 12;
+        var reviews = new SelectList(ViewBag.Reviews, "ReviewText", "ReviewText").Skip(lastNum).Take(12);
+        var reviewList = new List<WebApplication3.Models.Review>(ViewBag.Reviews);
+        var likesList = new List<WebApplication3.Models.Like>(ViewBag.Likes);
+    }
+    <div>
+        <h4>Последние отзывы</h4>
+        @CreateTable(reviewList, likesList)
     </div>
+</div>
 
-            
+
 @Scripts.Render("~/scripts/jquery-3.6.0.min.js")
 @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
 @section Scripts{
-    <script> $(document).on("click", "a.like", function () {
-     var id = $(this).data("id");
-     var link = "/Review/Like/" + id;
-     //Choose all a tags with this class and this ID
-     var a = $("a[class$='like'][data-id$='" + id + "']");
+    <script>
+        $(document).on("click", "a.like", function () {
+            var id = $(this).data("id");
+            var link = "/Review/Like/" + id;
+            //Choose all a tags with this class and this ID
+            var a = $("a[class$='like'][data-id$='" + id + "']");
             $.ajax({
                 type: "GET",
                 url: link,
                 success:
                     function (result) {
-                        a.html('<i class="btn btn-outline-warning"></i> <span>(' + result + ')</span>').removeClass("like").addClass("unlike");
-                }
+                        a.html('<i class="far fa-heart"></i><span>(' + result + ')</span>').removeClass("like").addClass("unlike");
+                    }
             });
         });
         $(document).on("click", "a.unlike", function () {
@@ -134,11 +141,16 @@
                 url: link,
                 success:
                     function (result) {
-                        a.html('<i class="btn btn-outline-warning"></i> <span>(' + result + ')</span>').removeClass("unlike").addClass("like");
+                        a.html('<i class="fas fa-heart"></i><span>(' + result + ')</span>').removeClass("unlike").addClass("like");
                     }
             });
         });
     </script>
+    <link href="~/Content/fontawesome.css" rel="stylesheet" />
+    <link href="~/Content/solid.css" rel="stylesheet" />
+    <link href="~/Content/brands.css" rel="stylesheet" />
+    <link href="~/Content/regular.css" rel="stylesheet" />
+
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     @*  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>*@
@@ -149,6 +161,11 @@
     nav {
         display: flex;
         flex-direction: column;
+    }
+
+    .badge_text {
+        display: inline;
+        width: 30px;
     }
 
     .card_color {
