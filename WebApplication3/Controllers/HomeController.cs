@@ -15,6 +15,9 @@ namespace WebApplication3.Controllers
         [Authorize]
         public ActionResult Index()
         {
+            var Email = User.Identity.Name;
+            var userId = reviews.Users.Single(a => a.Email == Email).UsrId;
+            ViewBag.userId = userId;
             IEnumerable<Like> Likes = reviews.Likes;
             IEnumerable<Review> review1 = reviews.Reviews;
             ViewBag.Reviews = review1;

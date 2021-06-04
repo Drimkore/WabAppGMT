@@ -69,21 +69,31 @@
                                         {
                                             <i class="fa fa-heart-o fa-lg"></i><span>(@review[i].Rating)</span>
                                         }
-                                        else if (review.Any(x => x.UserId == userid && x.ReviewId == review[i].ReviewId) || Ajax.ViewBag.Liked == true)
+                                        else if (likes.Any(a => a.ReviewId == review[i].ReviewId && a.UserId == ViewBag.userId))
                                         {
+                                            if (likes.Single(a => a.ReviewId == review[i].ReviewId && a.UserId == ViewBag.userId).IsLiked)
+                                            {
                                             <a href="javascript:void(0)" class="unlike" data-id="@review[i].ReviewId">
-                                                <i class="far fa-heart"></i>
-                                                <span>(@review[i].Rating.ToString())u</span>
+                                                <i class="fas fa-heart"></i>
+                                                <span>(@review[i].Rating.ToString())</span>
                                             </a>
-                                        }
-                                        else
-                                        {
+                                            }
+                                            else
+                                            {
                                             <a href="javascript:void(0)" class="like" data-id="@review[i].ReviewId">
                                                 <i class="far fa-heart"></i>
-                                                <span>(@review[i].Rating.ToString())l</span>
+                                                <span>(@review[i].Rating.ToString())</span>
+                                            </a>
+                                            }
+                                        }
+                                        else 
+                                        { 
+                                            <a href="javascript:void(0)" class="like" data-id="@review[i].ReviewId">
+                                                <i class="far fa-heart"></i>
+                                                <span>(@review[i].Rating.ToString())</span>
                                             </a>
                                         }
-                                    }
+                                        }
                                 </div>
                                 <div class="modal-footer card_color">
                                     Оценка: @review[i].Rating
@@ -127,7 +137,7 @@
                 url: link,
                 success:
                     function (result) {
-                        a.html('<i class="far fa-heart"></i><span>(' + result + ')</span>').removeClass("like").addClass("unlike");
+                        a.html('<i class="fas fa-heart"></i><span>(' + result + ')</span>').removeClass("like").addClass("unlike");
                     }
             });
         });
@@ -141,7 +151,7 @@
                 url: link,
                 success:
                     function (result) {
-                        a.html('<i class="fas fa-heart"></i><span>(' + result + ')</span>').removeClass("unlike").addClass("like");
+                        a.html('<i class="far fa-heart"></i><span>(' + result + ')</span>').removeClass("unlike").addClass("like");
                     }
             });
         });

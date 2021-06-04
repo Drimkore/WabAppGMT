@@ -166,18 +166,17 @@ namespace WebApplication3.Controllers
         [HttpGet]
         public string Like(int id)
         {
+            string Email = User.Identity.Name;
             var review1 = reviews.Reviews.FirstOrDefault(a => a.ReviewId == id);
             var reviewId = review1.ReviewId;
-            var userId = review1.UserId;
-            
-            var checkReview = reviews.Likes.Any(a => a.UserId.Equals(reviewId));
-            var checkUser = reviews.Likes.Any(a => a.ReviewId.Equals(userId));
-            if (checkReview && checkUser)
+            var userId = reviews.Users.Single(a => a.Email == Email).UsrId;
+            var checkReview = reviews.Likes.Any(a => a.ReviewId.Equals(reviewId) && a.UserId.Equals(userId));
+            if (checkReview)
             {
-                if (!reviews.Likes.Single(a => a.ReviewId.Equals(reviewId)).IsLiked)
+                if (!reviews.Likes.Single(a => a.ReviewId.Equals(reviewId) && a.UserId.Equals(userId)).IsLiked)
                 {
                     var changedreview = reviews.Reviews.Single(a => a.ReviewId.Equals(reviewId));
-                    var changeLike = reviews.Likes.Single(a => a.ReviewId.Equals(reviewId));
+                    var changeLike = reviews.Likes.Single(a => a.ReviewId.Equals(reviewId) && a.UserId.Equals(userId));
                     changedreview.Rating++;
                     changeLike.IsLiked = true;
                     reviews.SaveChanges();
@@ -185,7 +184,7 @@ namespace WebApplication3.Controllers
                 else
                 {
                     var changedreview = reviews.Reviews.Single(a => a.ReviewId.Equals(reviewId));
-                    var changeLike = reviews.Likes.Single(a => a.ReviewId.Equals(reviewId));
+                    var changeLike = reviews.Likes.Single(a => a.ReviewId.Equals(reviewId) && a.UserId.Equals(userId));
                     changedreview.Rating--;
                     changeLike.IsLiked = false;
                     reviews.SaveChanges();
