@@ -37,6 +37,7 @@ namespace WebApplication3.Controllers
         {
             DBContext db = new DBContext();
             string Email = User.Identity.Name;
+            review.Rating = 0;
             review.Username = db.Users.Single(b => b.Email == Email).Username;
             review.UserId = db.Users.Single(a => a.Email == Email).UsrId;
             review.Game = db.Games.Single(a => a.GameId == review.GameId).GameName;
@@ -118,8 +119,93 @@ namespace WebApplication3.Controllers
             }
             return PartialView(allReviews);
 
+        
+        
 
         }
+        //public string Like(bool mark, int reviewId, int userId)
+        //{
+        //    var review1 = reviews.Reviews.FirstOrDefault(a => a.ReviewId == reviewId);
+        //    var checkReview = reviews.Likes.Any(a => a.UserId.Equals(reviewId));
+        //    var checkUser = reviews.Likes.Any(a => a.ReviewId.Equals(userId));
+        //    if (checkReview && checkUser)
+        //    {
+        //        if (!reviews.Likes.Single(a => a.ReviewId.Equals(reviewId)).IsLiked)
+        //        {
+        //            var changedreview = reviews.Reviews.Single(a => a.ReviewId.Equals(reviewId));
+        //            var changeLike = reviews.Likes.Single(a => a.ReviewId.Equals(reviewId));
+        //            changedreview.Rating++;
+        //            changeLike.IsLiked = true;
+        //            reviews.SaveChanges();
+        //        }
+        //        else
+        //        {
+        //            var changedreview = reviews.Reviews.Single(a => a.ReviewId.Equals(reviewId));
+        //            var changeLike = reviews.Likes.Single(a => a.ReviewId.Equals(reviewId));
+        //            changedreview.Rating--;
+        //            changeLike.IsLiked = false;
+        //            reviews.SaveChanges();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        if (mark)
+        //        {
+        //            var changedReview = reviews.Reviews.Single(a => a.ReviewScore.Equals(reviewId));
+        //            changedReview.Rating++;
+        //            var newLike = new Like();
+        //            newLike.IsLiked = true;
+        //            newLike.ReviewId = reviewId;
+        //            newLike.UserId = userId;
+        //            reviews.Likes.Add(newLike);
+        //            reviews.SaveChanges();
+        //        }
+        //    }
+        //    return review1.Rating.ToString();
+        //}
+        [HttpGet]
+        public string Like(int id)
+        {
+            var review1 = reviews.Reviews.FirstOrDefault(a => a.ReviewId == id);
+            var reviewId = review1.ReviewId;
+            var userId = review1.UserId;
+            
+            var checkReview = reviews.Likes.Any(a => a.UserId.Equals(reviewId));
+            var checkUser = reviews.Likes.Any(a => a.ReviewId.Equals(userId));
+            if (checkReview && checkUser)
+            {
+                if (!reviews.Likes.Single(a => a.ReviewId.Equals(reviewId)).IsLiked)
+                {
+                    var changedreview = reviews.Reviews.Single(a => a.ReviewId.Equals(reviewId));
+                    var changeLike = reviews.Likes.Single(a => a.ReviewId.Equals(reviewId));
+                    changedreview.Rating++;
+                    changeLike.IsLiked = true;
+                    reviews.SaveChanges();
+                }
+                else
+                {
+                    var changedreview = reviews.Reviews.Single(a => a.ReviewId.Equals(reviewId));
+                    var changeLike = reviews.Likes.Single(a => a.ReviewId.Equals(reviewId));
+                    changedreview.Rating--;
+                    changeLike.IsLiked = false;
+                    reviews.SaveChanges();
+                }
+            }
+            else
+            {
+                    var changedReview = reviews.Reviews.Single(a => a.ReviewId.Equals(reviewId));
+                    changedReview.Rating++;
+                    var newLike = new Like();
+                    newLike.IsLiked = true;
+                    newLike.ReviewId = reviewId;
+                    newLike.UserId = userId;
+                    reviews.Likes.Add(newLike);
+                    reviews.SaveChanges();
+            }
+            return review1.Rating.ToString();
+        }
+
+
         [System.Web.Mvc.HttpGet]
         public ActionResult MyReviews()
         {

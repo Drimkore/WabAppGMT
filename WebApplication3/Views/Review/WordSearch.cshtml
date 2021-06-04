@@ -13,6 +13,7 @@
                         <div>
                             <h5 class="card-title">@d.Username  </h5>
                             <h5 class="card-title" style="margin-bottom:30px;">Оценка: @d.ReviewScore</h5>
+                            <h5 class="card-title" style="margin-bottom:30px;">Рейтинг отзыва: @d.Rating</h5>
                         </div>
                         <p class="card-text text-truncate" style="margin-bottom:30px;">@d.ReviewText</p>
                         <a href="#exampleModal1" id="showModal" class="btn btn-outline-warning stretched-link" data-bs-toggle="modal" data-bs-target="#modal-@d.ReviewId" style="margin-bottom:30px;">Показать больше</a>
@@ -23,11 +24,8 @@
                 <div class="modal-dialog modal-dialog-scrollable" style="width:100vh; max-width:none !important">
                     <div class="modal-content">
                         <div class="modal-header card_color">
-
                             <h5 class="modal-title" id="gameModalLabel" style="color:#ffd800; font-weight:600;">@d.Game </h5>
                             <h5 class="modal-title" id="exampleModalLabel" style="margin-left:100px">@d.Username  Оценка: @d.ReviewScore</h5>
-
-
                         </div>
                         <div class="modal-body card_color word_wrap">
                             @d.ReviewText

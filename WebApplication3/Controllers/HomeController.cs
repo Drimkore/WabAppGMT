@@ -15,9 +15,11 @@ namespace WebApplication3.Controllers
         [Authorize]
         public ActionResult Index()
         {
+            IEnumerable<Like> Likes = reviews.Likes;
             IEnumerable<Review> review1 = reviews.Reviews;
             ViewBag.Reviews = review1;
             var pagesCount = review1.Count();
+            ViewBag.Likes = Likes;
             ViewBag.PagesCount = pagesCount;
             return View();
         }

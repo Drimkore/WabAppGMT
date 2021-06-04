@@ -23,8 +23,5 @@ namespace WebApplication3.Models
         [DataType(DataType.Password)]
         [MinLength(6, ErrorMessage = "Пароль должен иметь минимум 6 символов")]
         public string Password { get; set; }
-        //[Display (Name = "SteamId пользователя")]
-        //[Required(AllowEmptyStrings = false, ErrorMessage = "Введите SteamId")]
-        //public string SteamId { get; set; }
     }
 }

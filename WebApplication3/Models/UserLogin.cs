@@ -18,7 +18,6 @@ namespace WebApplication3.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-
         [Display(Name = "Запомнить вход?")]
         public bool RememberMe { get; set; }
     }

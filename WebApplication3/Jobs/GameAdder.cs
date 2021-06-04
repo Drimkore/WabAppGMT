@@ -32,10 +32,6 @@ namespace WebApplication3.Jobs
                     db.SaveChanges();
                 }
             }
-
-
-
-
         }
     }
 }

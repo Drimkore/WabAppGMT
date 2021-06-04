@@ -11,5 +11,6 @@ namespace WebApplication3.Models
         public DbSet<User> Users { get; set; }
         public DbSet<Game> Games { get; set; }
         public DbSet<Review> Reviews { get; set; }    
+        public DbSet<Like> Likes { get; set; }
     }
 }

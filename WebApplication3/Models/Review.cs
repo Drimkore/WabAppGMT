@@ -22,6 +22,7 @@ namespace WebApplication3.Models
         public string ReviewText { get; set; }
         public DateTime ReviewTime { get; set; }
         public string Game { get; set; }
+        public int Rating { get; set; }
     }
 
 }
