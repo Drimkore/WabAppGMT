@@ -1,3 +1,3 @@
 # WabAppGMT
 
-Review site course project /  Курсовой проект сайта отзывов
+Course project: Game reviews site
